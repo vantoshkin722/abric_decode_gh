@@ -1,0 +1,2510 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Конспект по физике</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false,trust:true});"></script>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f5;
+    --text: #1a1a1a;
+    --text-muted: #555;
+    --accent: #2c5f8a;
+    --accent-light: #e8f0f7;
+    --accent-dark: #1a3d5c;
+    --border: #d4cfc8;
+    --def-bg: #f0f6fb;
+    --def-border: #2c5f8a;
+    --example-bg: #f9f6f0;
+    --example-border: #c9a84c;
+    --note-bg: #f0faf0;
+    --note-border: #4a8a4a;
+    --formula-bg: #fafafa;
+    --toc-width: 280px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; font-size:17px; }
+  body {
+    font-family:'Crimson Pro','Georgia',serif;
+    background:var(--bg); color:var(--text);
+    line-height:1.75; display:flex;
+  }
+
+  /* sidebar */
+  .sidebar {
+    position:fixed; top:0; left:0;
+    width:var(--toc-width); height:100vh;
+    background:#1e2a38; color:#c8d6e5;
+    overflow-y:auto; padding:1.5rem 0; z-index:100;
+    font-family:'Source Sans 3',sans-serif; font-size:.82rem;
+    transition:transform .3s;
+  }
+  .sidebar-title {
+    font-size:1rem; font-weight:700; color:#fff;
+    padding:0 1.2rem 1rem;
+    border-bottom:1px solid rgba(255,255,255,.1);
+    margin-bottom:.8rem; letter-spacing:.5px;
+    text-transform:uppercase;
+  }
+  .sidebar a {
+    display:block; color:#a0b4c8; text-decoration:none;
+    padding:.35rem 1.2rem; transition:all .2s;
+    border-left:3px solid transparent;
+  }
+  .sidebar a:hover,.sidebar a.active {
+    color:#fff; background:rgba(255,255,255,.05);
+    border-left-color:var(--accent);
+  }
+  .sidebar a.h2 { padding-left:1.2rem; font-weight:600; margin-top:.5rem; }
+  .sidebar a.h3 { padding-left:2rem; font-size:.78rem; }
+  .sidebar::-webkit-scrollbar { width:4px; }
+  .sidebar::-webkit-scrollbar-thumb { background:rgba(255,255,255,.2); border-radius:2px; }
+
+  .sidebar-toggle {
+    display:none; position:fixed; top:12px; left:12px; z-index:200;
+    background:var(--accent-dark); color:#fff; border:none;
+    border-radius:6px; padding:8px 12px; font-size:1.1rem; cursor:pointer;
+  }
+
+  /* main */
+  .main {
+    margin-left:var(--toc-width); flex:1;
+    max-width:860px; padding:2.5rem 3rem 4rem;
+  }
+  h1 {
+    font-family:'Source Sans 3',sans-serif;
+    font-size:2.2rem; font-weight:700;
+    color:var(--accent-dark); margin-bottom:.3rem;
+  }
+  .subtitle { font-size:1.1rem; color:var(--text-muted); margin-bottom:2.5rem; font-style:italic; }
+  h2 {
+    font-family:'Source Sans 3',sans-serif;
+    font-size:1.55rem; font-weight:700; color:var(--accent-dark);
+    margin:2.8rem 0 1rem; padding-bottom:.4rem;
+    border-bottom:2px solid var(--accent);
+  }
+  h3 {
+    font-family:'Source Sans 3',sans-serif;
+    font-size:1.2rem; font-weight:600; color:var(--accent);
+    margin:2rem 0 .8rem;
+  }
+  h4 {
+    font-family:'Source Sans 3',sans-serif;
+    font-size:1.05rem; font-weight:600; color:var(--text);
+    margin:1.5rem 0 .5rem;
+  }
+  p { margin-bottom:.9rem; }
+
+  /* boxes */
+  .def,.formula-box,.example,.note,.textbook {
+    border-radius:6px; padding:1rem 1.3rem;
+    margin:1.2rem 0; border-left:4px solid;
+  }
+  .def { background:var(--def-bg); border-color:var(--def-border); }
+  .formula-box { background:var(--formula-bg); border-color:var(--border); text-align:center; font-size:1.05rem; overflow-x:auto; }
+  .example { background:var(--example-bg); border-color:var(--example-border); }
+  .note { background:var(--note-bg); border-color:var(--note-border); }
+  .textbook { background:#f5f0fa; border-color:#7b5ea7; }
+  .textbook .box-title { color:#7b5ea7; }
+  .box-title {
+    font-family:'Source Sans 3',sans-serif;
+    font-weight:700; font-size:.85rem;
+    text-transform:uppercase; letter-spacing:.5px;
+    margin-bottom:.4rem;
+  }
+  .def .box-title { color:var(--def-border); }
+  .example .box-title { color:#8a7020; }
+  .note .box-title { color:var(--note-border); }
+
+  .diagram { display:flex; justify-content:center; margin:1.5rem 0; }
+  .diagram svg { max-width:100%; height:auto; }
+
+  table { border-collapse:collapse; margin:1rem 0; font-size:.95rem; }
+  th,td { border:1px solid var(--border); padding:.5rem .9rem; text-align:center; }
+  th { background:var(--accent-light); font-family:'Source Sans 3',sans-serif; font-weight:600; }
+
+  hr { border:none; border-top:1px solid var(--border); margin:2rem 0; }
+
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1rem 0; }
+  .two-col>div { border:1px solid var(--border); border-radius:6px; padding:1rem; background:#fff; }
+  .two-col h4 { margin-top:0; }
+
+  @media(max-width:900px){
+    .sidebar{transform:translateX(-100%);}
+    .sidebar.open{transform:translateX(0);}
+    .sidebar-toggle{display:block;}
+    .main{margin-left:0;padding:2rem 1.2rem;}
+    html{font-size:16px;}
+    .two-col{grid-template-columns:1fr;}
+  }
+  .katex{font-size:1.05em;}
+  .formula-box .katex{font-size:1.15em;}
+  .katex-display{margin:.8em 0;}
+  .katex .mop .msupsub{text-align:center;}
+  .katex .mop+.mspace+.mord{margin-left:-0.1em;}
+</style>
+</head>
+<body>
+
+<button class="sidebar-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">&#9776; Оглавление</button>
+
+<!-- боковая панель с оглавлением -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-title">Оглавление</div>
+  <a href="#lec1" class="h2">1. Измерения и кинематика</a>
+  <a href="#si" class="h3">Система СИ</a>
+  <a href="#coord" class="h3">Системы координат</a>
+  <a href="#velocity" class="h3">Скорость и ускорение</a>
+  <a href="#angular" class="h3">Угловая скорость, кривизна</a>
+  <a href="#galileo" class="h2">2. Принцип относительности</a>
+  <a href="#inertial" class="h3">Инерциальные СО</a>
+  <a href="#galtrans" class="h3">Преобразования Галилея</a>
+  <a href="#formulas" class="h3">Основные формулы</a>
+  <a href="#projectile" class="h3">Тело под углом</a>
+  <a href="#str" class="h2">3. Специальная теория относительности</a>
+  <a href="#postulates" class="h3">Постулаты Эйнштейна</a>
+  <a href="#simultaneity" class="h3">Относительность одновременности</a>
+  <a href="#timedil" class="h3">Замедление времени</a>
+  <a href="#lengthcont" class="h3">Сокращение длин</a>
+  <a href="#lorentz" class="h3">Преобразования Лоренца</a>
+  <a href="#veltrans" class="h3">Преобразования скорости</a>
+  <a href="#interval" class="h3">Интервал</a>
+  <a href="#fourvec" class="h3">4-векторы</a>
+  <a href="#fourvel" class="h3">4-скорость и 4-импульс</a>
+  <a href="#dynamics" class="h2">4. Нерелятивистская динамика</a>
+  <a href="#force" class="h3">Сила. Законы Ньютона</a>
+  <a href="#covariance" class="h3">Ковариантность</a>
+  <a href="#examples-dyn" class="h3">Примеры</a>
+  <a href="#momentum" class="h3">Импульс и сохранение</a>
+  <a href="#com" class="h3">Центр масс</a>
+  <a href="#gravity-ex" class="h3">Тяготение и орбиты</a>
+  <a href="#energy" class="h2">5. Работа и энергия</a>
+  <a href="#work" class="h3">Работа</a>
+  <a href="#kinetic" class="h3">Кинетическая энергия</a>
+  <a href="#power" class="h3">Мощность</a>
+  <a href="#conservative" class="h3">Консервативные силы</a>
+  <a href="#potential" class="h3">Потенциальная энергия</a>
+  <a href="#conservation" class="h3">ЗСЭ</a>
+  <a href="#collisions" class="h2">6. Столкновения</a>
+  <a href="#restitution" class="h3">Коэфф. восстановления</a>
+  <a href="#elastic" class="h3">Упругое</a>
+  <a href="#inelastic" class="h3">Неупругое</a>
+  <a href="#com-frame" class="h3">Система ц.м.</a>
+  <a href="#decay" class="h3">Распад</a>
+  <a href="#fundamental" class="h2">7. Фундам. взаимодействия</a>
+  <a href="#reldyn" class="h2">8. Релятивистская динамика</a>
+  <a href="#4momentum" class="h3">4-импульс</a>
+  <a href="#relenergy" class="h3">Релятивистская энергия</a>
+  <a href="#massdefect" class="h3">Дефект массы</a>
+  <a href="#relforce" class="h3">Релятивистская сила</a>
+  <a href="#photon" class="h3">Фотон и эффект Доплера</a>
+  <a href="#ev-units" class="h3">Электронвольт и массы частиц</a>
+  <a href="#oscillations" class="h2">9. Гармонические колебания</a>
+  <a href="#periodic" class="h3">Периодические процессы</a>
+  <a href="#integral-motion" class="h3">Интеграл движения</a>
+  <a href="#finite-motion" class="h3">Финитное и инфинитное</a>
+  <a href="#harmonic-eq" class="h3">Уравнение колебаний</a>
+  <a href="#oscillator-models" class="h3">Модели осциллятора</a>
+</nav>
+
+<main class="main">
+
+<h1>Конспект по физике</h1>
+
+<h2 id="lec1">1. Измерения и кинематика</h2>
+
+<h3 id="si">Система СИ</h3>
+<p><strong>Система СИ</strong> — принятая международная система измерения физических величин.</p>
+<table>
+  <tr><th>Символ</th><th>Величина</th><th>Единица</th></tr>
+  <tr><td>$L$</td><td>длина</td><td>метр (м)</td></tr>
+  <tr><td>$t$</td><td>время</td><td>секунда (с)</td></tr>
+  <tr><td>$m$</td><td>масса</td><td>килограмм (кг)</td></tr>
+  <tr><td>$I$</td><td>сила тока</td><td>ампер (А)</td></tr>
+  <tr><td>$K$</td><td>температура</td><td>кельвин (К)</td></tr>
+</table>
+
+<!-- системы координат -->
+<h3 id="coord">Системы координат</h3>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §1</div>
+  <strong>Материальная точка</strong> (частица) — тело, размерами которого можно пренебречь в данных условиях движения. Например, Землю можно рассматривать как материальную точку при изучении её движения вокруг Солнца (отношение радиуса Земли к расстоянию до Солнца $\sim 10^{-5}$), но не при описании приливов. Положение частицы задаётся радиус-вектором $\vec{r}(t)$, конец которого описывает <strong>траекторию</strong>.
+</div>
+
+<h4>Декартова система координат</h4>
+<div class="diagram">
+<svg width="420" height="345" viewBox="0 0 420 345" font-family="serif">
+  <defs>
+    <marker id="dah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#1a3d5c"/></marker>
+    <marker id="dah-r" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#1a4a8c"/></marker>
+    <marker id="dah-or" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#c0392b"/></marker>
+  </defs>
+
+  <!-- xy-плоскость: большой параллелограмм, проходит через начало координат и охватывает концы осей -->
+  <path d="M 150 190 L 420 190 L 270 340 L 0 340 Z"
+        fill="#f3eedd" stroke="#c9a84c" stroke-width="1" opacity="0.55"/>
+
+  <!-- оси -->
+  <line x1="150" y1="220" x2="150" y2="30" stroke="#1a3d5c" stroke-width="1.8" marker-end="url(#dah)"/>
+  <line x1="150" y1="220" x2="380" y2="220" stroke="#1a3d5c" stroke-width="1.8" marker-end="url(#dah)"/>
+  <line x1="150" y1="220" x2="55" y2="315" stroke="#1a3d5c" stroke-width="1.8" marker-end="url(#dah)"/>
+
+  <text x="156" y="28" font-size="16" fill="#1a3d5c" font-style="italic">z</text>
+  <text x="388" y="224" font-size="16" fill="#1a3d5c" font-style="italic">y</text>
+  <text x="42" y="322" font-size="16" fill="#1a3d5c" font-style="italic">x</text>
+
+  <!-- метка O — слева сверху от начала координат, вне зон других элементов -->
+  <text x="137" y="220" font-size="13" fill="#555">O</text>
+
+  <!-- орты в начале координат -->
+  <line x1="150" y1="220" x2="150" y2="188" stroke="#c0392b" stroke-width="1.8" marker-end="url(#dah-or)"/>
+  <line x1="150" y1="220" x2="184" y2="220" stroke="#c0392b" stroke-width="1.8" marker-end="url(#dah-or)"/>
+  <line x1="150" y1="220" x2="130" y2="240" stroke="#c0392b" stroke-width="1.8" marker-end="url(#dah-or)"/>
+  <text x="156" y="178" font-size="12" fill="#c0392b" font-style="italic" font-weight="bold">e<tspan font-size="9" dy="3">z</tspan></text>
+  <text x="188" y="214" font-size="12" fill="#c0392b" font-style="italic" font-weight="bold">e<tspan font-size="9" dy="3">y</tspan></text>
+  <text x="115" y="240" font-size="12" fill="#c0392b" font-style="italic" font-weight="bold">e<tspan font-size="9" dy="3">x</tspan></text>
+
+  <!-- радиус-вектор r к точке P (мир: x=30, y=120, z=90) -->
+  <line x1="150" y1="220" x2="240" y2="160" stroke="#1a4a8c" stroke-width="2.5" marker-end="url(#dah-r)"/>
+  <text x="200" y="183" font-size="16" fill="#1a4a8c" font-weight="bold" font-style="italic">r</text>
+
+  <!-- проекции:
+       1) P → проекция P_xy (вертикальный спуск вдоль -z)
+       2) O → проекция (радиус в плоскости xy)
+       3) проекция → подпорка к оси y (параллельно -e_x)
+       4) проекция → подпорка к оси x (параллельно -e_y) -->
+  <line x1="240" y1="160" x2="240" y2="250" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="150" y1="220" x2="240" y2="250" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="240" y1="250" x2="270" y2="220" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="240" y1="250" x2="120" y2="250" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+</svg>
+</div>
+<p>Орты — ортонормированный базис: $\vec{e}_x, \vec{e}_y, \vec{e}_z$.</p>
+
+<h4>Цилиндрическая система координат</h4>
+<div class="diagram">
+<svg width="400" height="340" viewBox="0 0 400 340" font-family="serif">
+  <defs>
+    <marker id="cyl-ax" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#1a3d5c"/></marker>
+    <marker id="cyl-r"  markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#c0392b"/></marker>
+    <marker id="cyl-p"  markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#2a7a3a"/></marker>
+    <marker id="cyl-z"  markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#5a4bb0"/></marker>
+  </defs>
+
+  <!-- оси: O=(130,230), ê_x→(-1,1), ê_y→(1,0), ê_z→(0,-1) -->
+  <line x1="130" y1="230" x2="130" y2="30" stroke="#1a3d5c" stroke-width="1.8" marker-end="url(#cyl-ax)"/>
+  <text x="136" y="28" font-size="16" fill="#1a3d5c" font-style="italic">z</text>
+
+  <line x1="130" y1="230" x2="370" y2="230" stroke="#1a3d5c" stroke-width="1.8" marker-end="url(#cyl-ax)"/>
+  <text x="378" y="234" font-size="16" fill="#1a3d5c" font-style="italic">y</text>
+
+  <line x1="130" y1="230" x2="60" y2="300" stroke="#1a3d5c" stroke-width="1.8" marker-end="url(#cyl-ax)"/>
+  <text x="48" y="313" font-size="16" fill="#1a3d5c" font-style="italic">x</text>
+
+  <text x="118" y="230" font-size="13" fill="#555">O</text>
+
+  <!-- радиус r в плоскости xy: от O к проекции P_xy
+       цилиндрические координаты P: r=65, φ=55°, z=105
+       мировые: a=r·cos55°≈37, b=r·sin55°≈53
+       P_xy в SVG: (130-37+53, 230+37) = (146, 267)
+       P в SVG: (146, 267-105) = (146, 162) -->
+  <line x1="130" y1="230" x2="146" y2="267" stroke="#c0392b" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#cyl-r)"/>
+  <text x="148" y="260" font-size="14" fill="#c0392b" font-style="italic" font-weight="bold">r</text>
+
+  <!-- дуга φ (от оси +x к направлению r в плоскости xy, R'=22)
+       θ=0°:  SVG (130-22, 230+22) = (108, 252) — на оси x
+       θ=55°: SVG (130-22·cos55°+22·sin55°, 230+22·cos55°) ≈ (135, 243) — на направлении r -->
+  <path d="M 108 252 Q 119 251 135 243" stroke="#7030a0" stroke-width="1.6" fill="none"/>
+  <text x="120" y="262" font-size="14" fill="#7030a0" font-style="italic">φ</text>
+
+  <!-- вертикальная z-линия от P_xy до P -->
+  <line x1="146" y1="267" x2="146" y2="162" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="151" y="218" font-size="12" fill="#555" font-style="italic">z</text>
+
+  <!-- точка P -->
+  <circle cx="146" cy="162" r="5" fill="#c9a84c" stroke="#a07a30" stroke-width="1"/>
+  <text x="133" y="159" font-size="14" fill="#a07a30" font-weight="bold">P</text>
+
+  <!-- орт e_r в точке P (радиально наружу в плоскости xy)
+       направление: cos55°·ê_x + sin55°·ê_y → SVG (0.245, 0.574), норм. (0.393, 0.920)
+       длина 35: → (146+14, 162+32) = (160, 194) -->
+  <line x1="146" y1="162" x2="160" y2="194" stroke="#c0392b" stroke-width="2" marker-end="url(#cyl-r)"/>
+  <text x="165" y="200" font-size="13" fill="#c0392b" font-style="italic" font-weight="bold">e<tspan font-size="10" dy="3">r</tspan></text>
+
+  <!-- орт e_φ в точке P (касательно к окружности, в направлении роста φ)
+       направление: -sin55°·ê_x + cos55°·ê_y → SVG (1.393, -0.819), норм. (0.862, -0.507)
+       длина 35: → (146+30, 162-18) = (176, 144) -->
+  <line x1="146" y1="162" x2="176" y2="144" stroke="#2a7a3a" stroke-width="2" marker-end="url(#cyl-p)"/>
+  <text x="180" y="140" font-size="13" fill="#2a7a3a" font-style="italic" font-weight="bold">e<tspan font-size="10" dy="3">φ</tspan></text>
+
+  <!-- орт e_z в точке P (вверх вдоль оси z) -->
+  <line x1="146" y1="158" x2="146" y2="120" stroke="#5a4bb0" stroke-width="2" marker-end="url(#cyl-z)"/>
+  <text x="151" y="118" font-size="13" fill="#5a4bb0" font-style="italic" font-weight="bold">e<tspan font-size="10" dy="3">z</tspan></text>
+</svg>
+</div>
+<p>Координаты: $(r, \varphi, z)$. Орты: $\vec{e}_r$ (по направлению радиуса от центра), $\vec{e}_\varphi$ (по касательной), $\vec{e}_z$ (по оси $z$).</p>
+
+<div class="formula-box">
+$$d\vec{r} = \vec{e}_r \, dr + \vec{e}_\varphi \, r \, d\varphi + \vec{e}_z \, dz$$
+</div>
+
+<div class="note">
+  <div class="box-title">Важно</div>
+  Базис $(\vec{e}_r, \vec{e}_\varphi, \vec{e}_z)$ меняется в зависимости от точки, поэтому дифференцировать через формулу «как обычно» нельзя!
+</div>
+
+<h4>Сферическая система координат</h4>
+
+<div class="diagram">
+<svg width="360" height="300" viewBox="0 0 360 300" font-family="serif">
+  <defs>
+    <marker id="sph-ax" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#1a3d5c"/></marker>
+    <marker id="sph-r"  markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#1a4a8c"/></marker>
+    <marker id="sph-er" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#c0392b"/></marker>
+    <marker id="sph-et" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#2a7a3a"/></marker>
+    <marker id="sph-ep" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#c9a84c"/></marker>
+  </defs>
+
+  <!-- параллель (окружность широты на сфере) — эллипс -->
+  <ellipse cx="130" cy="100" rx="110" ry="24" stroke="#b8b8b8" stroke-width="1.2" fill="none"/>
+
+  <!-- оси -->
+  <line x1="130" y1="240" x2="130" y2="25" stroke="#1a3d5c" stroke-width="1.6" marker-end="url(#sph-ax)"/>
+  <text x="135" y="24" font-size="15" fill="#1a3d5c" font-style="italic">z</text>
+
+  <line x1="130" y1="240" x2="330" y2="240" stroke="#1a3d5c" stroke-width="1.6" marker-end="url(#sph-ax)"/>
+  <text x="335" y="244" font-size="15" fill="#1a3d5c" font-style="italic">y</text>
+
+  <line x1="130" y1="240" x2="45" y2="285" stroke="#1a3d5c" stroke-width="1.6" marker-end="url(#sph-ax)"/>
+  <text x="32" y="295" font-size="15" fill="#1a3d5c" font-style="italic">x</text>
+  <text x="119" y="241" font-size="12" fill="#555">O</text>
+
+  <!-- радиус-вектор r от O до точки P на сфере -->
+  <line x1="130" y1="240" x2="240" y2="100" stroke="#1a4a8c" stroke-width="2.4" marker-end="url(#sph-r)"/>
+  <text x="170" y="165" font-size="16" fill="#1a4a8c" font-weight="bold" font-style="italic">r</text>
+
+  <!-- точка P -->
+  <circle cx="240" cy="100" r="5" fill="#c9a84c" stroke="#a07a30" stroke-width="1"/>
+  <text x="230" y="96" font-size="14" fill="#a07a30" font-weight="bold">P</text>
+
+  <!-- проекция r на плоскость xy -->
+  <line x1="240" y1="100" x2="240" y2="240" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="130" y1="240" x2="240" y2="240" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- угол θ: между +z и r -->
+  <path d="M 130 180 A 60 60 0 0 1 161 196" stroke="#7030a0" stroke-width="1.6" fill="none"/>
+  <text x="137" y="202" font-size="14" fill="#7030a0" font-style="italic">θ</text>
+
+  <!-- угол φ в плоскости xy: между +x и проекцией r -->
+  <path d="M 98 259 A 34 34 0 0 0 164 240" stroke="#a05" stroke-width="1.6" fill="none"/>
+  <text x="125" y="276" font-size="14" fill="#a05" font-style="italic">φ</text>
+
+  <!-- орты e_r, e_θ, e_φ в точке P -->
+  <!-- e_r: вдоль r (от O к P), от точки P наружу -->
+  <line x1="244" y1="97" x2="282" y2="49" stroke="#c0392b" stroke-width="2" marker-end="url(#sph-er)"/>
+  <text x="285" y="48" font-size="13" fill="#c0392b" font-style="italic" font-weight="bold">e<tspan font-size="10" dy="3">r</tspan></text>
+
+  <!-- e_θ: по меридиану (к югу/увеличению θ); перпендикулярно r в плоскости меридиана -->
+  <line x1="243" y1="105" x2="290" y2="135" stroke="#2a7a3a" stroke-width="2" marker-end="url(#sph-et)"/>
+  <text x="292" y="140" font-size="13" fill="#2a7a3a" font-style="italic" font-weight="bold">e<tspan font-size="10" dy="3">θ</tspan></text>
+
+  <!-- e_φ: по широте (касательно к параллели, в плоскости xy — вправо-вниз в перспективе) -->
+  <line x1="240" y1="100" x2="268" y2="112" stroke="#c9a84c" stroke-width="2" marker-end="url(#sph-ep)"/>
+  <text x="265" y="105" font-size="13" fill="#a07a30" font-style="italic" font-weight="bold">e<tspan font-size="10" dy="3">φ</tspan></text>
+</svg>
+</div>
+
+<p>Координаты: $(r, \theta, \varphi)$, где $r$ — расстояние от начала координат до частицы, $\theta\in[0,\pi]$ — полярный угол между осью $z$ и радиус-вектором, $\varphi\in[0,2\pi)$ — азимутальный угол между осью $x$ и проекцией радиус-вектора на плоскость $xy$. Если поместить начало в центре глобуса с северным полюсом на оси $z$, то $\theta$ отсчитывается вдоль меридиана к югу, а $\varphi$ — вдоль широты к востоку (Кочеев-Сербо §1). Орты $\vec{e}_r, \vec{e}_\theta, \vec{e}_\varphi$ направлены вдоль радиус-вектора, вдоль меридиана и вдоль широты соответственно.</p>
+
+<div class="formula-box">
+$$\vec r = \vec{e}_r \, r, \qquad d\vec{r} = \vec{e}_r \, dr + \vec{e}_\theta \, r \, d\theta + \vec{e}_\varphi \, r \sin\theta \, d\varphi$$
+</div>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §1</div>
+  <strong>Компоненты скорости</strong> в полярных координатах: $v_r = \dot{r}$, $v_\varphi = r\dot\varphi$; $v^2 = \dot{r}^2 + (r\dot\varphi)^2$.
+  <br>В сферических: $v_r = \dot{r}$, $v_\theta = r\dot\theta$, $v_\varphi = r\dot\varphi\sin\theta$;
+  $$v^2 = \dot{r}^2 + r^2\dot\theta^2 + r^2\dot\varphi^2\sin^2\theta$$
+</div>
+
+<!-- скорость и ускорение -->
+<h3 id="velocity">Скорость и ускорение</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Скорость</strong> — изменение расстояния за единицу времени; равна производной радиус-вектора по времени:
+  $$\vec{v} = \dfrac{d\vec{r}}{dt} = \dot{\vec{r}} = \lim_{\Delta t \to 0} \dfrac{\vec{r}(t+\Delta t) - \vec{r}(t)}{\Delta t}$$
+</div>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §1–2</div>
+  Вектор скорости $\vec{v}(t)$ параллелен <strong>касательной к траектории</strong> в точке $\vec{r}(t)$. С течением времени конец вектора $\vec{v}(t)$ описывает кривую — <strong>годограф скорости</strong>. Вектор ускорения $\vec{a} = \dfrac{d\vec{v}}{dt}$ параллелен касательной к годографу скорости, но может быть направлен произвольно по отношению к траектории.
+</div>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Ускорение</strong> — изменение скорости за единицу времени:
+  $$\vec{a} = \dfrac{d\vec{v}}{dt} = \dot{\vec{v}} = \ddot{\vec{r}}$$
+</div>
+
+<h4>Разложение ускорения на компоненты</h4>
+
+<div class="diagram">
+<svg width="440" height="220" viewBox="0 0 440 220" font-family="serif">
+  <defs>
+    <marker id="ax-v" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#2a7a3a"/></marker>
+    <marker id="ax-a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#1a3d5c"/></marker>
+    <marker id="ax-at" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#7030a0"/></marker>
+    <marker id="ax-an" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#7030a0"/></marker>
+    <marker id="ax-dv" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#3a8fc7"/></marker>
+  </defs>
+
+  <!-- v(t) горизонтально -->
+  <line x1="40" y1="170" x2="240" y2="170" stroke="#2a7a3a" stroke-width="2.4" marker-end="url(#ax-v)"/>
+  <text x="125" y="190" font-size="15" fill="#2a7a3a" font-weight="bold" font-style="italic">v(t)</text>
+
+  <!-- v(t+dt) под небольшим углом вверх -->
+  <line x1="40" y1="170" x2="290" y2="100" stroke="#2a7a3a" stroke-width="2.4" stroke-dasharray="6,3" marker-end="url(#ax-v)"/>
+  <text x="160" y="120" font-size="15" fill="#2a7a3a" font-weight="bold" font-style="italic">v(t+dt)</text>
+
+  <!-- параллельный перенос v(t) к концу v(t+dt): вспомогательный пунктир показывает,
+       что dv = v(t+dt) - v(t) соединяет наконечники векторов из общего начала -->
+  <!-- dv = a·dt от наконечника v(t) к наконечнику v(t+dt) -->
+  <line x1="240" y1="170" x2="290" y2="100" stroke="#3a8fc7" stroke-width="2" marker-end="url(#ax-dv)"/>
+  <text x="295" y="115" font-size="13" fill="#3a8fc7" font-style="italic">d<tspan font-weight="bold">v</tspan> = <tspan font-weight="bold">a</tspan>·dt</text>
+
+  <!-- разложение dv: тангенциальная (вдоль v(t)) и нормальная (перпендикулярно v(t)) -->
+  <!-- проекция конца dv на v(t): (290, 170) -->
+  <line x1="240" y1="170" x2="290" y2="170" stroke="#7030a0" stroke-width="1.8" marker-end="url(#ax-at)"/>
+  <text x="252" y="187" font-size="12" fill="#7030a0" font-style="italic">d<tspan font-weight="bold">v</tspan><tspan font-size="9" dy="3">‖</tspan><tspan dy="-3"> = d</tspan><tspan font-weight="bold">v</tspan><tspan font-size="9" dy="3">t</tspan></text>
+
+  <line x1="290" y1="170" x2="290" y2="100" stroke="#7030a0" stroke-width="1.8" marker-end="url(#ax-an)"/>
+  <text x="295" y="140" font-size="12" fill="#7030a0" font-style="italic">d<tspan font-weight="bold">v</tspan><tspan font-size="9" dy="3">⊥</tspan><tspan dy="-3"> = d</tspan><tspan font-weight="bold">v</tspan><tspan font-size="9" dy="3">n</tspan></text>
+
+  <!-- метка прямого угла -->
+  <rect x="282" y="162" width="8" height="8" fill="none" stroke="#7030a0" stroke-width="1"/>
+
+  <!-- формула справа -->
+  <text x="365" y="100" font-size="14" fill="#1a3d5c" font-style="italic" font-weight="bold">a = a<tspan font-size="10" dy="3">t</tspan><tspan dy="-3"> + a</tspan><tspan font-size="10" dy="3">n</tspan></text>
+  <text x="365" y="125" font-size="12" fill="#7030a0" font-style="italic">a<tspan font-size="9" dy="3">t</tspan><tspan dy="-3"> ‖ v</tspan></text>
+  <text x="365" y="145" font-size="12" fill="#7030a0" font-style="italic">a<tspan font-size="9" dy="3">n</tspan><tspan dy="-3"> ⊥ v</tspan></text>
+</svg>
+</div>
+
+<!-- наглядный рисунок: разложение ускорения на окружности -->
+<div class="diagram">
+<svg width="280" height="240" viewBox="0 0 280 240" font-family="serif">
+  <defs>
+    <marker id="cir-v" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#2a7a3a"/></marker>
+    <marker id="cir-a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#1a4a8c"/></marker>
+    <marker id="cir-comp" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#7030a0"/></marker>
+  </defs>
+
+  <!-- траектория (окружность) -->
+  <circle cx="120" cy="135" r="75" stroke="#bbb" stroke-width="1.4" stroke-dasharray="6,4" fill="none"/>
+
+  <!-- центр O -->
+  <circle cx="120" cy="135" r="3" fill="#1a3d5c"/>
+  <text x="108" y="150" font-size="13" fill="#555">O</text>
+
+  <!-- радиус R от O к P (пунктиром) -->
+  <!-- P на окружности, угол ≈ −45° от +x: P=(120+53, 135−53)=(173,82) -->
+  <line x1="120" y1="135" x2="173" y2="82" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="125" y="115" font-size="13" fill="#555" font-style="italic">R</text>
+
+  <!-- точка P -->
+  <circle cx="173" cy="82" r="4.5" fill="#c9a84c" stroke="#a07a30" stroke-width="1"/>
+  <text x="180" y="78" font-size="14" fill="#a07a30" font-weight="bold">P</text>
+
+  <!-- скорость v (касательная, против часовой стрелки визуально)
+       касательная CCW: поворот радиус-вектора на 90° → направление (−0.707,−0.707)
+       длина 55: → (173−39, 82−39) = (134, 43) -->
+  <line x1="173" y1="82" x2="134" y2="43" stroke="#2a7a3a" stroke-width="2.4" marker-end="url(#cir-v)"/>
+  <text x="140" y="36" font-size="15" fill="#2a7a3a" font-weight="bold" font-style="italic">v</text>
+
+  <!-- a_n (центростремительное, от P к O)
+       направление (−0.707, 0.707), длина 35: → (173−25, 82+25)=(148, 107) -->
+  <line x1="173" y1="82" x2="148" y2="107" stroke="#7030a0" stroke-width="2" marker-end="url(#cir-comp)"/>
+  <text x="150" y="115" font-size="13" fill="#7030a0" font-style="italic" font-weight="bold">a<tspan font-size="10" dy="3">n</tspan></text>
+
+  <!-- a_τ (тангенциальное, параллельно v, короче)
+       направление (−0.707,−0.707), длина 22: → (173−16, 82−16)=(157, 66) -->
+  <line x1="173" y1="82" x2="157" y2="66" stroke="#7030a0" stroke-width="2" marker-end="url(#cir-comp)"/>
+  <text x="162" y="60" font-size="13" fill="#7030a0" font-style="italic" font-weight="bold">a<tspan font-size="10" dy="3">τ</tspan></text>
+
+  <!-- полное ускорение a = a_n + a_τ
+       смещение (−25−16, 25−16) = (−41, 9). Конец: (173−41, 82+9) = (132, 91) -->
+  <line x1="173" y1="82" x2="132" y2="91" stroke="#1a4a8c" stroke-width="2.2" marker-end="url(#cir-a)"/>
+  <text x="118" y="96" font-size="14" fill="#1a4a8c" font-weight="bold" font-style="italic">a</text>
+
+  <!-- пунктир параллелограмма: a_n→a и a_τ→a -->
+  <line x1="148" y1="107" x2="132" y2="91" stroke="#7030a0" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+  <line x1="157" y1="66" x2="132" y2="91" stroke="#7030a0" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+
+  <!-- метка прямого угла между a_n и a_τ в точке P -->
+  <polyline points="167,88 161,82 167,76" stroke="#7030a0" stroke-width="1" fill="none"/>
+
+  <text x="50" y="220" font-size="12" fill="#1a3d5c" font-style="italic">a<tspan font-size="9" dy="3">n</tspan><tspan dy="-3"> = v²/R</tspan></text>
+</svg>
+</div>
+
+<p>$\vec{a} = \vec{a}_\tau + \vec{a}_n$, где:</p>
+<p>$\vec{a}_\tau$ — <strong>тангенциальное</strong> (касательное, продольное) ускорение — направлено по касательной к траектории.</p>
+<p>$\vec{a}_n$ — <strong>нормальное</strong> (центростремительное, поперечное) ускорение — направлено перпендикулярно касательной.</p>
+
+<!-- угловая скорость и кривизна -->
+<h3 id="angular">Угловая скорость и кривизна</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Угловая скорость</strong> — производная угла по времени:
+  $$\omega = \dfrac{d\varphi}{dt} \quad \left[\dfrac{\text{рад}}{\text{с}}\right]$$
+  Вектор $\vec{\omega}$ направлен по оси вращения (по правилу правой руки).
+</div>
+
+<div class="diagram">
+<svg width="340" height="280" viewBox="0 0 340 280" font-family="serif">
+  <defs>
+    <marker id="rot-r" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#1a4a8c"/></marker>
+    <marker id="rot-v" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#c0392b"/></marker>
+    <marker id="rot-w" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0,0 9,3.5 0,7" fill="#2a7a3a"/></marker>
+  </defs>
+
+  <!-- окружность в перспективе (эллипс — плоскость вращения) -->
+  <ellipse cx="170" cy="200" rx="110" ry="32" stroke="#bbb" stroke-width="1.4" fill="none" stroke-dasharray="6,4"/>
+
+  <!-- центр O -->
+  <circle cx="170" cy="200" r="3.2" fill="#1a3d5c"/>
+  <text x="158" y="218" font-size="13" fill="#555">O</text>
+
+  <!-- вектор ω вдоль оси вращения (вертикально вверх) -->
+  <line x1="170" y1="200" x2="170" y2="60" stroke="#2a7a3a" stroke-width="2.6" marker-end="url(#rot-w)"/>
+  <text x="148" y="55" font-size="17" fill="#2a7a3a" font-weight="bold" font-style="italic">ω</text>
+
+  <!-- предыдущий радиус (пунктирный, θ_prev=−50°)
+       P_prev на эллипсе: (170+110·cos50°, 200−32·sin50°) ≈ (241, 176) -->
+  <line x1="170" y1="200" x2="241" y2="176" stroke="#1a4a8c" stroke-width="1" stroke-dasharray="3,3" opacity="0.7"/>
+
+  <!-- текущий радиус-вектор R (θ=−20°)
+       P на эллипсе: (170+110·cos20°, 200−32·sin20°) ≈ (273, 189) -->
+  <line x1="170" y1="200" x2="273" y2="189" stroke="#1a4a8c" stroke-width="2.2" marker-end="url(#rot-r)"/>
+  <text x="232" y="186" font-size="15" fill="#1a4a8c" font-weight="bold" font-style="italic">R</text>
+
+  <!-- точка P -->
+  <circle cx="273" cy="189" r="5" fill="#c9a84c" stroke="#a07a30" stroke-width="1"/>
+  <text x="280" y="184" font-size="14" fill="#a07a30" font-weight="bold">P</text>
+
+  <!-- вектор скорости v — касательная к эллипсу в P (вправо-вниз)
+       касательная: (−110·sin(−20°), 32·cos(−20°)) ≈ (37.6, 30.1), норм. (0.781, 0.625)
+       длина 55: → (273+43, 189+34) = (316, 223) -->
+  <line x1="273" y1="189" x2="316" y2="223" stroke="#c0392b" stroke-width="2.6" marker-end="url(#rot-v)"/>
+  <text x="318" y="220" font-size="16" fill="#c0392b" font-weight="bold" font-style="italic">v</text>
+
+  <!-- дуга dφ между двумя радиусами (R'=50, в перспективе эллипс rx=50, ry≈14.5)
+       θ=−50° на малой дуге: (170+50·cos50°, 200−14.5·sin50°) ≈ (202, 189)
+       θ=−20° на малой дуге: (170+50·cos20°, 200−14.5·sin20°) ≈ (217, 195)
+       оба конца лежат точно на соответствующих радиусах -->
+  <path d="M 202 189 Q 212 192 217 195" stroke="#7030a0" stroke-width="1.8" fill="none"/>
+  <text x="207" y="208" font-size="14" fill="#7030a0" font-style="italic">dφ</text>
+
+  <!-- формула v = ω × r -->
+  <text x="40" y="265" font-size="13" fill="#1a3d5c" font-style="italic"><tspan font-weight="bold">v</tspan> = [<tspan font-weight="bold">ω</tspan>, <tspan font-weight="bold">R</tspan>],   |<tspan font-weight="bold">v</tspan>| = ωR</text>
+</svg>
+</div>
+
+<p>Связь скорости с угловой скоростью в полярных координатах. Воспользуемся правилом дифференцирования произведения и тем, что при вращении $\dfrac{d\vec{e}_r}{d\varphi} = \vec{e}_\varphi$:</p>
+<div class="formula-box">
+$$\vec{v} = \dfrac{d(r \vec{e}_r)}{dt} = \vec{e}_r \, \dot r + r \, \dfrac{d\vec{e}_r}{d\varphi} \cdot \dot\varphi = \vec{e}_r \, \dot r + r \omega \, \vec{e}_\varphi$$
+$$v_r = \dot{r}, \qquad v_n = r \dot{\varphi} = r \omega$$
+</div>
+<p>В векторной форме связь линейной и угловой скоростей для точки на вращающемся радиус-векторе:</p>
+<div class="formula-box">
+$$\vec{v} = [\vec{\omega}, \vec{r}\,] = \vec{\omega} \times \vec{r}, \qquad |\vec v| = \omega r \sin\angle(\vec\omega,\vec r)$$
+</div>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §2</div>
+  <strong>Радиус кривизны траектории</strong>: через три близкие точки траектории $\vec r(t-\Delta t)$, $\vec r(t)$, $\vec r(t+\Delta t)$ можно провести окружность. При $\Delta t\to 0$ её радиус $R_\text{кр}(t)$ называется радиусом кривизны траектории в точке $\vec r(t)$. Из разложения ускорения на тангенциальную и нормальную составляющие и условия движения по соприкасающейся окружности получается удобная формула:
+  $$R_\text{кр} = \dfrac{v^2}{a_n}, \qquad a_n = \vec a - \vec a_\tau = \vec a - \dfrac{(\vec a\cdot\vec v)}{v^2}\vec v$$
+  Кривизна — обратная величина: $K = \dfrac{1}{R_\text{кр}}$.
+</div>
+
+<div class="def">
+  <div class="box-title">Определение (Лекция 1+(2))</div>
+  <strong>Кривизна</strong> — степень отклонения кривой от прямой; определяется как отношение малого поворота касательной $\Delta\varphi$ к соответствующему малому перемещению вдоль кривой $\Delta l$:
+  $$K = \dfrac{d\varphi}{dl} = \lim_{\Delta l \to 0}\dfrac{\Delta\varphi}{\Delta l}, \qquad R_\text{кр} = \dfrac{1}{K}$$
+</div>
+
+<!-- рисунок из презентации лекция 1+(2), слайд 2.2+: поворот касательной Δφ на участке длины Δl
+     дуга окружности с центром (170,300) радиуса 200, точки p1=(55,136), p2=(153,101).
+     касательные имеют наклоны -0.700 и -0.087; пересекаются в (99,105). -->
+<div class="diagram">
+<svg width="340" height="200" viewBox="0 0 340 200">
+  <!-- фрагмент кривой: кубическая аппроксимация дуги окружности -->
+  <path d="M 55 136 C 84 116 118 104 153 101" stroke="#7030a0" stroke-width="2.8" fill="none"/>
+  <!-- засечки, перпендикулярные касательным в p1 и p2 -->
+  <line x1="51" y1="129" x2="60" y2="143" stroke="#c0392b" stroke-width="1.6"/>
+  <line x1="152" y1="93" x2="154" y2="109" stroke="#c0392b" stroke-width="1.6"/>
+  <!-- подпись Δl под кривой -->
+  <text x="88" y="148" font-size="16" fill="#555" font-style="italic" font-weight="bold" font-family="serif">Δl</text>
+  <!-- касательная 1 (в точке p1, наклон -0.700), проходит через (99,105) -->
+  <line x1="30" y1="154" x2="155" y2="67" stroke="#1a3d5c" stroke-width="1.3"/>
+  <!-- касательная 2 (в точке p2, наклон -0.087), проходит через (99,105) -->
+  <line x1="40" y1="110" x2="300" y2="88" stroke="#1a3d5c" stroke-width="1.3"/>
+  <!-- точка пересечения -->
+  <circle cx="99" cy="105" r="2" fill="#1a3d5c"/>
+  <!-- дуга Δφ у точки пересечения: r=22, start (117, 92), end (121, 103) -->
+  <path d="M 117 92 A 22 22 0 0 1 121 103" stroke="#a05" stroke-width="1.8" fill="none"/>
+  <text x="128" y="100" font-size="16" fill="#a05" font-style="italic" font-weight="bold" font-family="serif">Δφ</text>
+  <text x="22" y="188" font-size="11" fill="#888" font-family="sans-serif">поворот касательной Δφ на участке длины Δl</text>
+</svg>
+</div>
+
+<div class="diagram">
+<svg width="320" height="195" viewBox="0 0 320 195">
+  <!-- кривая (траектория) -->
+  <path d="M 20 130 Q 100 10 200 60 Q 270 95 300 140" stroke="#888" stroke-width="2" fill="none"/>
+  <!-- соприкасающаяся окружность -->
+  <circle cx="155" cy="100" r="55" stroke="#2c5f8a" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/>
+  <circle cx="155" cy="100" r="2.5" fill="#2c5f8a"/>
+  <text x="160" y="98" font-size="11" fill="#2c5f8a" font-family="sans-serif">центр</text>
+  <!-- точка касания -->
+  <circle cx="143" cy="46" r="4" fill="#e55"/>
+  <line x1="155" y1="100" x2="143" y2="46" stroke="#2c5f8a" stroke-width="1.5"/>
+  <text x="113" y="78" font-size="13" fill="#2c5f8a" font-style="italic" font-family="serif">R<tspan font-size="9" dy="3">кр</tspan></text>
+  <text x="20" y="186" font-size="11" fill="#888" font-family="sans-serif">соприкасающаяся окружность к траектории</text>
+</svg>
+</div>
+
+<p>Центростремительное ускорение:</p>
+<div class="formula-box">
+$$a_n = \dfrac{v^2}{R_{\text{кр}}}$$
+</div>
+
+<!-- принцип относительности -->
+<h2 id="galileo">2. Принцип относительности. Преобразования Галилея</h2>
+
+<h3 id="inertial">Инерциальные системы отсчёта</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Инерциальная система отсчёта (ИСО)</strong> — система отсчёта, относительно которой тело покоится или движется равномерно и прямолинейно, если равнодействующая сил (сумма всех сил, действующих на тело) равна нулю.
+</div>
+
+<p><strong>Фундаментальные свойства пространства-времени:</strong></p>
+<p>— <em>Однородность пространства</em> (сдвиговая симметрия): равноправность всех пространственных точек.</p>
+<p>— <em>Изотропность пространства</em> (симметрия относительно поворотов): равноправность всех направлений.</p>
+<p>— <em>Однородность времени</em> (трансляционная симметрия): равноправность всех временных точек отсчёта.</p>
+
+<p>Все инерциальные СО равноправны. Законы физики одинаковы во всех ИСО (<strong>ковариантны</strong>).</p>
+
+<h4>Закон инерции Галилея</h4>
+<p>Свободное тело в инерциальной СО движется прямолинейно и равномерно.</p>
+
+<h4>I закон Ньютона</h4>
+<p>Тело движется с постоянной скоростью (в т.ч. покоится) в отсутствие внешних сил, т.е. в отсутствие взаимодействия.</p>
+
+<h3 id="galtrans">Преобразования Галилея</h3>
+
+<p>Преобразования координат при переходе из ИСО $S$ в другую $S'$ (в нерелятивистской кинематике, $v \ll c$).</p>
+
+<h4>Виды преобразований СО</h4>
+
+<div class="diagram">
+<svg width="680" height="210" viewBox="0 0 680 210" font-family="serif">
+  <defs>
+    <marker id="aht-b" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#1a3d5c"/></marker>
+    <marker id="aht-r" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#e55"/></marker>
+    <marker id="aht-g" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#5a5"/></marker>
+    <marker id="aht-y" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#c9a84c"/></marker>
+  </defs>
+
+  <!-- a) Трансляция -->
+  <text x="110" y="20" font-size="13" fill="#444" text-anchor="middle" font-weight="bold">а) Трансляция</text>
+  <line x1="20" y1="170" x2="90" y2="170" stroke="#1a3d5c" stroke-width="1.5" marker-end="url(#aht-b)"/>
+  <line x1="20" y1="170" x2="20" y2="100" stroke="#1a3d5c" stroke-width="1.5" marker-end="url(#aht-b)"/>
+  <text x="94" y="174" font-size="13" fill="#1a3d5c">x</text>
+  <text x="10" y="98" font-size="13" fill="#1a3d5c">y</text>
+  <text x="8" y="187" font-size="13" fill="#1a3d5c" font-weight="bold">S</text>
+  <line x1="150" y1="120" x2="220" y2="120" stroke="#e55" stroke-width="1.5" marker-end="url(#aht-r)"/>
+  <line x1="150" y1="120" x2="150" y2="50" stroke="#e55" stroke-width="1.5" marker-end="url(#aht-r)"/>
+  <text x="224" y="124" font-size="13" fill="#e55">x'</text>
+  <text x="140" y="48" font-size="13" fill="#e55">y'</text>
+  <text x="138" y="137" font-size="13" fill="#e55" font-weight="bold">S'</text>
+  <line x1="20" y1="170" x2="150" y2="120" stroke="#5a5" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#aht-g)"/>
+  <text x="78" y="138" font-size="14" fill="#5a5" font-style="italic" font-weight="bold">a</text>
+
+  <!-- b) Поворот -->
+  <text x="350" y="20" font-size="13" fill="#444" text-anchor="middle" font-weight="bold">б) Поворот на угол φ</text>
+  <line x1="270" y1="170" x2="430" y2="170" stroke="#1a3d5c" stroke-width="1.5" marker-end="url(#aht-b)"/>
+  <line x1="270" y1="170" x2="270" y2="40" stroke="#1a3d5c" stroke-width="1.5" marker-end="url(#aht-b)"/>
+  <text x="434" y="174" font-size="13" fill="#1a3d5c">x</text>
+  <text x="260" y="38" font-size="13" fill="#1a3d5c">y</text>
+  <!-- повёрнутые оси (≈30°) -->
+  <line x1="270" y1="170" x2="408" y2="90" stroke="#e55" stroke-width="1.5" marker-end="url(#aht-r)"/>
+  <line x1="270" y1="170" x2="190" y2="32" stroke="#e55" stroke-width="1.5" marker-end="url(#aht-r)"/>
+  <text x="412" y="92" font-size="13" fill="#e55">x'</text>
+  <text x="178" y="32" font-size="13" fill="#e55">y'</text>
+  <!-- угол φ -->
+  <path d="M 320 170 A 50 50 0 0 0 313 145" stroke="#555" stroke-width="1.5" fill="none"/>
+  <text x="322" y="160" font-size="14" fill="#555" font-style="italic">φ</text>
+  <text x="258" y="187" font-size="13" fill="#1a3d5c" font-weight="bold">O</text>
+
+  <!-- c) Движение со скоростью V -->
+  <text x="580" y="20" font-size="13" fill="#444" text-anchor="middle" font-weight="bold">в) Движение со скоростью V</text>
+  <line x1="470" y1="170" x2="540" y2="170" stroke="#1a3d5c" stroke-width="1.5" marker-end="url(#aht-b)"/>
+  <line x1="470" y1="170" x2="470" y2="100" stroke="#1a3d5c" stroke-width="1.5" marker-end="url(#aht-b)"/>
+  <text x="544" y="174" font-size="13" fill="#1a3d5c">x</text>
+  <text x="460" y="98" font-size="13" fill="#1a3d5c">y</text>
+  <text x="458" y="187" font-size="13" fill="#1a3d5c" font-weight="bold">S</text>
+  <line x1="585" y1="170" x2="660" y2="170" stroke="#e55" stroke-width="1.5" marker-end="url(#aht-r)"/>
+  <line x1="585" y1="170" x2="585" y2="100" stroke="#e55" stroke-width="1.5" marker-end="url(#aht-r)"/>
+  <text x="664" y="174" font-size="13" fill="#e55">x'</text>
+  <text x="575" y="98" font-size="13" fill="#e55">y'</text>
+  <text x="573" y="187" font-size="13" fill="#e55" font-weight="bold">S'</text>
+  <!-- вектор скорости V -->
+  <line x1="600" y1="75" x2="660" y2="75" stroke="#c9a84c" stroke-width="2.2" marker-end="url(#aht-y)"/>
+  <text x="623" y="68" font-size="14" fill="#c9a84c" font-weight="bold" font-style="italic">V</text>
+</svg>
+</div>
+
+<p><strong>Трансляция</strong> — сдвиг начала отсчёта на вектор $\vec{a}$:</p>
+<div class="formula-box">
+$$\vec{r} = \vec{r}^{\,\prime} + \vec{a}, \qquad t = t' + \tau$$
+</div>
+
+<p><strong>Поворот</strong> относительно некоторой оси:</p>
+<div class="formula-box">
+$$x' = x\cos\varphi + y\sin\varphi, \qquad y' = -x\sin\varphi + y\cos\varphi$$
+</div>
+
+<p><strong>Сдвиг начала отсчёта времени:</strong> $t = t' + \tau$.</p>
+
+<h4>Преобразования Галилея (нерелятивистские)</h4>
+<p>$S'$ движется относительно $S$ поступательно с постоянной скоростью $\vec{V}$.</p>
+
+<div class="diagram">
+<svg width="420" height="260" viewBox="0 0 420 260" font-family="serif">
+  <defs>
+    <marker id="gal-b" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#1a3d5c"/></marker>
+    <marker id="gal-r" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#c0392b"/></marker>
+    <marker id="gal-v" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#3a8fc7"/></marker>
+  </defs>
+
+  <!-- Система S (сплошная) -->
+  <line x1="80" y1="200" x2="80" y2="40" stroke="#1a3d5c" stroke-width="1.6" marker-end="url(#gal-b)"/>
+  <line x1="80" y1="200" x2="340" y2="200" stroke="#1a3d5c" stroke-width="1.6" marker-end="url(#gal-b)"/>
+  <line x1="80" y1="200" x2="35" y2="245" stroke="#1a3d5c" stroke-width="1.6" marker-end="url(#gal-b)"/>
+  <text x="68" y="36" font-size="14" fill="#1a3d5c" font-style="italic">y</text>
+  <text x="335" y="210" font-size="14" fill="#1a3d5c" font-style="italic">x</text>
+  <text x="22" y="253" font-size="14" fill="#1a3d5c" font-style="italic">z</text>
+
+  <!-- Система S' (пунктир) -->
+  <line x1="180" y1="200" x2="180" y2="60" stroke="#1a3d5c" stroke-width="1.4" stroke-dasharray="5,3" marker-end="url(#gal-b)"/>
+  <line x1="180" y1="200" x2="390" y2="200" stroke="#1a3d5c" stroke-width="1.4" stroke-dasharray="5,3" marker-end="url(#gal-b)"/>
+  <line x1="180" y1="200" x2="135" y2="245" stroke="#1a3d5c" stroke-width="1.4" stroke-dasharray="5,3" marker-end="url(#gal-b)"/>
+  <text x="168" y="56" font-size="14" fill="#1a3d5c" font-style="italic">y'</text>
+  <text x="385" y="210" font-size="14" fill="#1a3d5c" font-style="italic">x'</text>
+  <text x="122" y="253" font-size="14" fill="#1a3d5c" font-style="italic">z'</text>
+
+  <!-- Радиус-векторы r, r' к одной точке -->
+  <line x1="80" y1="200" x2="270" y2="75" stroke="#c0392b" stroke-width="2" marker-end="url(#gal-r)"/>
+  <text x="160" y="130" font-size="15" fill="#c0392b" font-weight="bold" font-style="italic">r</text>
+  <line x1="180" y1="200" x2="270" y2="75" stroke="#c0392b" stroke-width="2" marker-end="url(#gal-r)"/>
+  <text x="240" y="140" font-size="15" fill="#c0392b" font-weight="bold" font-style="italic">r'</text>
+  <circle cx="270" cy="75" r="3" fill="#c0392b"/>
+
+  <!-- Вектор скорости V -->
+  <line x1="85" y1="200" x2="180" y2="200" stroke="#3a8fc7" stroke-width="2.8" marker-end="url(#gal-v)"/>
+  <text x="118" y="220" font-size="15" fill="#3a8fc7" font-weight="bold" font-style="italic">V</text>
+
+  <!-- Часы t и t' -->
+  <circle cx="40" cy="70" r="15" stroke="#1a3d5c" stroke-width="1.5" fill="none"/>
+  <text x="36" y="76" font-size="14" fill="#1a3d5c" font-style="italic">t</text>
+  <circle cx="380" cy="70" r="15" stroke="#1a3d5c" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
+  <text x="375" y="76" font-size="14" fill="#1a3d5c" font-style="italic">t'</text>
+
+  <!-- Подпись формулы -->
+  <text x="210" y="25" font-size="14" fill="#555" text-anchor="middle" font-style="italic">r = r' + V·t,  t = t'</text>
+</svg>
+</div>
+
+<p>Предпосылки:</p>
+<p>— $v \ll c$ (скорость много меньше скорости света)</p>
+<p>— Принцип относительности (процессы протекают одинаково в любой ИСО)</p>
+<p>— Время абсолютно: $t = t' + \tau$, а значит $\Delta t = \Delta t'$</p>
+<p>— Продольные размеры тел не изменяются</p>
+
+<p><strong>Следствия:</strong></p>
+<p>— Одновременность событий абсолютна</p>
+<p>— Неизменность поперечных размеров</p>
+<p>— Сложение координат: $x = x' + Vt$, $t = t'$</p>
+
+<p><strong>Преобразование скорости:</strong></p>
+<div class="formula-box">
+$$\vec{v}_i = \vec{v}_{i}^{\,\prime} + \vec{V}$$
+</div>
+<p>Скорость частицы в $S$ = скорость частицы в $S'$ + скорость движения самой $S'$.</p>
+
+<p><strong>Преобразование ускорения:</strong></p>
+<div class="formula-box">
+$$\dfrac{d\vec{v}_i}{dt} = \vec{a}_i = \vec{a}_{i}^{\,\prime} + 0 = \vec{a}_{i}^{\,\prime} \quad (\text{т.к. } \vec{V} = \text{const})$$
+</div>
+<p>Ускорение одинаково во всех ИСО.</p>
+
+<h3 id="formulas">Основные формулы кинематики</h3>
+
+<p>Из ряда Тейлора:</p>
+<div class="formula-box">
+$$S(t) = S(t_0) + \dfrac{S'(t_0)}{1!}(t - t_0) + \dfrac{S''(t_0)}{2!}(t - t_0)^2 + \ldots$$
+</div>
+
+<p>При $t_0 = 0$, обозначая $v_0 = S'(t_0)$ — начальная скорость, $a = S''(t_0)$ — ускорение:</p>
+
+<div class="formula-box">
+$$\boxed{s(t) = s_0 + v_0 t + \dfrac{a t^2}{2}}$$
+$$\boxed{v(t) = v_0 + at}$$
+</div>
+
+<h3 id="projectile">Тело, брошенное под углом к горизонту</h3>
+
+<div class="diagram">
+<svg width="380" height="220" viewBox="0 0 380 220" font-family="serif">
+  <defs>
+    <marker id="ahp" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#1a3d5c"/></marker>
+    <marker id="ahp2" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#c9a84c"/></marker>
+    <marker id="ahp3" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#888"/></marker>
+  </defs>
+  <!-- оси -->
+  <line x1="45" y1="180" x2="355" y2="180" stroke="#1a3d5c" stroke-width="1.5" marker-end="url(#ahp)"/>
+  <line x1="45" y1="180" x2="45" y2="20" stroke="#1a3d5c" stroke-width="1.5" marker-end="url(#ahp)"/>
+  <text x="360" y="184" font-size="14" fill="#1a3d5c" font-style="italic">x</text>
+  <text x="34" y="22" font-size="14" fill="#1a3d5c" font-style="italic">y</text>
+  <!-- парабола траектории -->
+  <path d="M 45 180 Q 195 -35 345 180" stroke="#2c5f8a" stroke-width="2.5" fill="none"/>
+  <!-- метка максимальной высоты (вертикаль) -->
+  <line x1="195" y1="73" x2="195" y2="180" stroke="#bbb" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="194" y="68" font-size="12" fill="#888">h<tspan font-size="9" dy="3">max</tspan></text>
+  <!-- вектор ускорения свободного падения g в вершине -->
+  <line x1="175" y1="80" x2="175" y2="120" stroke="#888" stroke-width="1.6" marker-end="url(#ahp3)"/>
+  <text x="158" y="105" font-size="14" fill="#888" font-style="italic">g</text>
+  <!-- вектор начальной скорости v0 (угол ≈ 40°) -->
+  <line x1="45" y1="180" x2="120" y2="117" stroke="#c9a84c" stroke-width="2.2" marker-end="url(#ahp2)"/>
+  <text x="90" y="130" font-size="14" fill="#c9a84c" font-weight="bold" font-style="italic">v<tspan font-size="10" dy="3">0</tspan></text>
+  <!-- компонента v0x -->
+  <line x1="45" y1="180" x2="120" y2="180" stroke="#c9a84c" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#ahp2)"/>
+  <text x="70" y="190" font-size="12" fill="#c9a84c" font-style="italic">v<tspan font-size="9" dy="3">0x</tspan></text>
+  <!-- компонента v0y -->
+  <line x1="120" y1="180" x2="120" y2="117" stroke="#c9a84c" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#ahp2)"/>
+  <text x="126" y="155" font-size="12" fill="#c9a84c" font-style="italic">v<tspan font-size="9" dy="3">0y</tspan></text>
+  <!-- угол α -->
+  <path d="M 80 180 A 50 50 0 0 0 80 150" stroke="#555" stroke-width="1.5" fill="none"/>
+  <text x="70" y="170" font-size="14" fill="#555" font-style="italic">α</text>
+</svg>
+</div>
+
+<p>Раскладываем движение по осям:</p>
+
+<p><strong>По оси $x$:</strong> $v_{0x} = v_0 \cos\alpha$, ускорения нет ($a_x = 0$):</p>
+<div class="formula-box">
+$$\ell(t) = v_{0x} \cdot t = v_0 \cos\alpha \cdot t$$
+</div>
+
+<p><strong>По оси $y$:</strong> $v_{0y} = v_0 \sin\alpha$, ускорение $-g$:</p>
+<div class="formula-box">
+$$h(t) = v_{0y} \cdot t - \dfrac{g t^2}{2}, \qquad v_y(t) = v_{0y} - g t$$
+</div>
+
+<div class="note">
+  <div class="box-title">Правило знаков</div>
+  Всегда следим за знаком вектора: по оси — «+», против оси — «&minus;».
+</div>
+
+<div class="example">
+  <div class="box-title">Пример: радиус кривизны траектории в верхней точке</div>
+  В высшей точке параболы скорость горизонтальна: $v = v_0 \cos\alpha$, а ускорение $\vec g$ перпендикулярно скорости, поэтому $a_n = g$. Тогда из $a_n = \dfrac{v^2}{R_\text{кр}}$:
+  $$g = \dfrac{(v_0 \cos\alpha)^2}{R_\text{кр}} \quad\Longrightarrow\quad R_\text{кр} = \dfrac{(v_0 \cos\alpha)^2}{g}$$
+</div>
+
+<!-- специальная теория относительности -->
+<h2 id="str">3. Специальная теория относительности</h2>
+
+<h3 id="postulates">Постулаты Эйнштейна (СТО)</h3>
+
+<p>Рассматриваются тела при скоростях $v \sim c \approx 3 \cdot 10^8$ м/с.</p>
+
+<p><strong>1-й постулат.</strong> Принцип относительности справедлив для <em>всех</em> явлений физики, не только механических.</p>
+<p><strong>2-й постулат.</strong> Существует предельная скорость распространения взаимодействий и движения материальных объектов. Она одинакова во всех ИСО и совпадает со скоростью света в вакууме: $c = \max v$.</p>
+
+<p><strong>Следствия:</strong></p>
+<p>— Относительность времени, расстояний, масс (продольного размера)</p>
+<p>— Взаимосвязь массы и энергии: $E = mc^2$</p>
+<p>— Релятивистский закон сложения скоростей</p>
+<p>— Неизменность поперечных размеров тела</p>
+
+<h3 id="simultaneity">Относительность одновременности</h3>
+
+<div class="diagram">
+<svg width="380" height="185" viewBox="0 0 380 185">
+  <defs>
+    <marker id="ahv" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#c9a84c"/></marker>
+    <marker id="ahs" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><polygon points="0,0 6,2 0,4" fill="#e55"/></marker>
+  </defs>
+  <!-- корпус вагона -->
+  <rect x="55" y="45" width="230" height="65" rx="8" fill="#fafafa" stroke="#1a3d5c" stroke-width="2"/>
+  <!-- наблюдатель в центре -->
+  <circle cx="170" cy="82" r="7" fill="#2c5f8a"/>
+  <line x1="170" y1="89" x2="170" y2="105" stroke="#2c5f8a" stroke-width="2"/>
+  <!-- луч света влево -->
+  <line x1="170" y1="75" x2="75" y2="62" stroke="#e55" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ahs)"/>
+  <!-- луч света вправо -->
+  <line x1="170" y1="75" x2="265" y2="62" stroke="#e55" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ahs)"/>
+  <!-- метки скорости света c -->
+  <text x="115" y="64" font-size="14" fill="#e55" font-weight="bold" font-family="serif">c</text>
+  <text x="220" y="64" font-size="14" fill="#e55" font-weight="bold" font-family="serif">c</text>
+  <!-- вектор скорости вагона v -->
+  <line x1="295" y1="78" x2="345" y2="78" stroke="#c9a84c" stroke-width="2.5" marker-end="url(#ahv)"/>
+  <text x="310" y="71" font-size="14" fill="#c9a84c" font-weight="bold" font-family="serif">V</text>
+  <!-- подписи снизу -->
+  <text x="60" y="132" font-size="12" fill="#1a3d5c" font-family="serif">стенка Л</text>
+  <text x="240" y="132" font-size="12" fill="#1a3d5c" font-family="serif">стенка П</text>
+  <text x="80" y="175" font-size="12" fill="#888" font-family="sans-serif">В СО вагона: свет приходит одновременно</text>
+  <!-- наблюдатель на перроне -->
+  <circle cx="28" cy="142" r="6" fill="#555"/>
+  <line x1="28" y1="148" x2="28" y2="162" stroke="#555" stroke-width="2"/>
+  <text x="8" y="178" font-size="11" fill="#555" font-family="sans-serif">S (перрон)</text>
+</svg>
+</div>
+
+<p>В классике ($v \ll c$): наблюдатель в вагоне и на перроне фиксируют одновременный приход сигналов. При скоростях $v \sim c$: наблюдатель в $S'$ видит, что свет приходит одновременно, а наблюдатель в $S$ — нет:</p>
+
+<div class="diagram">
+<svg width="500" height="185" viewBox="0 0 500 185">
+  <defs>
+    <marker id="ahs2" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><polygon points="0,0 6,2 0,4" fill="#e55"/></marker>
+    <marker id="ahv2" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#c9a84c"/></marker>
+  </defs>
+  <!-- корпус вагона сдвинут вправо (он уехал) -->
+  <rect x="95" y="45" width="230" height="65" rx="8" fill="#fafafa" stroke="#1a3d5c" stroke-width="2"/>
+  <!-- источник в центре вагона -->
+  <circle cx="210" cy="82" r="5" fill="#2c5f8a"/>
+  <!-- луч влево — дошёл до стенки Л (она приблизилась) -->
+  <line x1="210" y1="75" x2="115" y2="55" stroke="#e55" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ahs2)"/>
+  <text x="148" y="60" font-size="13" fill="#e55" font-weight="bold" font-family="serif">c</text>
+  <!-- луч вправо — стенка П убежала -->
+  <line x1="210" y1="75" x2="340" y2="55" stroke="#e55" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="340" y1="55" x2="395" y2="52" stroke="#e55" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#ahs2)"/>
+  <text x="265" y="60" font-size="13" fill="#e55" font-weight="bold" font-family="serif">c</text>
+  <!-- вектор скорости V -->
+  <line x1="335" y1="78" x2="395" y2="78" stroke="#c9a84c" stroke-width="2.5" marker-end="url(#ahv2)"/>
+  <text x="355" y="71" font-size="14" fill="#c9a84c" font-weight="bold" font-family="serif">V</text>
+  <!-- подписи стенок -->
+  <text x="80" y="132" font-size="12" fill="#1a3d5c" font-family="serif">стенка Л</text>
+  <text x="280" y="132" font-size="12" fill="#1a3d5c" font-family="serif">стенка П</text>
+  <!-- наблюдатель на перроне -->
+  <circle cx="28" cy="82" r="6" fill="#555"/>
+  <line x1="28" y1="88" x2="28" y2="102" stroke="#555" stroke-width="2"/>
+  <text x="8" y="118" font-size="11" fill="#555" font-family="sans-serif">S (перрон)</text>
+  <!-- пояснение -->
+  <text x="80" y="165" font-size="12" fill="#e55" font-family="sans-serif">В СО перрона: стенка Л приближается, стенка П убегает</text>
+  <text x="80" y="180" font-size="12" fill="#e55" font-weight="bold" font-family="sans-serif">t_Л &lt; t_П — свет приходит НЕ одновременно!</text>
+</svg>
+</div>
+
+<div class="formula-box">
+$$t_{\text{л}} = \dfrac{L}{2(c+V)}, \qquad t_{\text{п}} = \dfrac{L}{2(c-V)}, \qquad t_{\text{п}} > t_{\text{л}}$$
+</div>
+
+<p>Для наблюдателя в $S$ пули не долетают одновременно — одновременность <strong>относительна</strong>.</p>
+
+<h3 id="timedil">Замедление времени</h3>
+
+<div class="diagram">
+<svg width="420" height="210" viewBox="0 0 420 210">
+  <defs>
+    <marker id="ahd" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#e55"/></marker>
+    <marker id="ahd2" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#2c5f8a"/></marker>
+  </defs>
+  <!-- система покоя s' -->
+  <text x="30" y="20" font-size="13" fill="#1a3d5c" font-weight="bold" font-family="sans-serif">СО покоя (S')</text>
+  <rect x="50" y="30" width="100" height="120" rx="4" fill="none" stroke="#ccc" stroke-width="1"/>
+  <!-- зеркала -->
+  <line x1="60" y1="40" x2="140" y2="40" stroke="#1a3d5c" stroke-width="2"/>
+  <line x1="60" y1="140" x2="140" y2="140" stroke="#1a3d5c" stroke-width="2"/>
+  <!-- вертикальный луч света -->
+  <line x1="100" y1="140" x2="100" y2="45" stroke="#e55" stroke-width="2" marker-end="url(#ahd)"/>
+  <text x="105" y="95" font-size="12" fill="#e55" font-family="serif">c&#x0394;t'</text>
+  <!-- подписи -->
+  <text x="145" y="42" font-size="11" fill="#555" font-family="serif">y&#x2082;</text>
+  <text x="145" y="142" font-size="11" fill="#555" font-family="serif">y&#x2081;</text>
+
+  <!-- движущаяся система s -->
+  <text x="230" y="20" font-size="13" fill="#1a3d5c" font-weight="bold" font-family="sans-serif">ЛСО (S), вагон движется</text>
+  <rect x="240" y="30" width="150" height="120" rx="4" fill="none" stroke="#ccc" stroke-width="1"/>
+  <!-- зеркала -->
+  <line x1="250" y1="40" x2="290" y2="40" stroke="#1a3d5c" stroke-width="2"/>
+  <line x1="340" y1="140" x2="380" y2="140" stroke="#1a3d5c" stroke-width="2"/>
+  <!-- диагональный луч света -->
+  <line x1="360" y1="140" x2="270" y2="45" stroke="#e55" stroke-width="2" marker-end="url(#ahd)"/>
+  <!-- горизонтальное смещение vδt/2 -->
+  <line x1="360" y1="158" x2="270" y2="158" stroke="#2c5f8a" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#ahd2)"/>
+  <foreignObject x="285" y="160" width="80" height="40">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:12px;color:#2c5f8a;">$\dfrac{V\Delta t}{2}$</div>
+  </foreignObject>
+  <!-- метка пути света cδt/2 -->
+  <foreignObject x="315" y="58" width="80" height="40">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:12px;color:#e55;">$\dfrac{c\Delta t}{2}$</div>
+  </foreignObject>
+</svg>
+</div>
+
+<p>Свет, пущенный вертикально в покоящейся системе, проходит $c\Delta t' = 2(y_B - y_A)$. В движущейся системе свет идёт по диагонали (по теореме Пифагора):</p>
+
+<div class="formula-box">
+$$\left(\dfrac{c\Delta t}{2}\right)^2 = (y_B - y_A)^2 + \left(\dfrac{V\Delta t}{2}\right)^2$$
+</div>
+
+<p>Так как поперечные размеры не меняются: $c^2\Delta t^2 = c^2\Delta t'^2 + V^2\Delta t^2$, откуда:</p>
+
+<div class="formula-box">
+$$\boxed{\Delta t = \dfrac{\Delta t'}{\sqrt{1 - \dfrac{V^2}{c^2}}} = \gamma \cdot \Delta t'}$$
+</div>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Гамма-фактор</strong> (релятивистский множитель):
+  $$\gamma = \dfrac{1}{\sqrt{1 - \dfrac{V^2}{c^2}}} = \dfrac{1}{\sqrt{1 - \beta^2}} \geq 1, \qquad \beta = \dfrac{V}{c}$$
+</div>
+
+<div class="diagram">
+<svg width="420" height="220" viewBox="0 0 420 220">
+  <defs><marker id="ahg2" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#1a3d5c"/></marker></defs>
+  <!-- оси -->
+  <line x1="40" y1="180" x2="340" y2="180" stroke="#1a3d5c" stroke-width="1.2" marker-end="url(#ahg2)"/>
+  <line x1="40" y1="200" x2="40" y2="20" stroke="#1a3d5c" stroke-width="1.2" marker-end="url(#ahg2)"/>
+  <foreignObject x="339" y="175" width="80" height="35">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-size:13px;color:#1a3d5c;">$\beta = \dfrac{V}{c}$</div>
+  </foreignObject>
+  <text x="22" y="20" font-size="13" fill="#1a3d5c" font-style="italic" font-family="serif">γ</text>
+  <!-- метки -->
+  <line x1="40" y1="160" x2="44" y2="160" stroke="#1a3d5c" stroke-width="1"/>
+  <text x="22" y="164" font-size="11" fill="#555" font-family="serif">1</text>
+  <line x1="40" y1="120" x2="44" y2="120" stroke="#1a3d5c" stroke-width="1"/>
+  <text x="22" y="124" font-size="11" fill="#555" font-family="serif">2</text>
+  <line x1="40" y1="80" x2="44" y2="80" stroke="#1a3d5c" stroke-width="1"/>
+  <text x="22" y="84" font-size="11" fill="#555" font-family="serif">4</text>
+  <line x1="280" y1="180" x2="280" y2="184" stroke="#1a3d5c" stroke-width="1"/>
+  <text x="275" y="196" font-size="11" fill="#555" font-family="serif">1</text>
+  <line x1="160" y1="180" x2="160" y2="184" stroke="#1a3d5c" stroke-width="1"/>
+  <text x="153" y="196" font-size="11" fill="#555" font-family="serif">0.5</text>
+  <!-- асимптота β=1 -->
+  <line x1="280" y1="180" x2="280" y2="20" stroke="#e55" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="285" y="35" font-size="11" fill="#e55" font-family="serif">β → 1</text>
+  <!-- кривая γ(β): начинается в (40,160), асимптота к 280 -->
+  <path d="M 40 160 Q 160 158 220 150 Q 250 140 265 120 Q 275 90 278 30" stroke="#2c5f8a" stroke-width="2.5" fill="none"/>
+  <text x="100" y="155" font-size="12" fill="#2c5f8a" font-style="italic" font-family="serif">γ(β)</text>
+</svg>
+<div style="text-align:center; margin-top:0.3rem;">$\gamma(\beta) = \dfrac{1}{\sqrt{1 - \beta^2}}$</div>
+</div>
+
+<div class="note">
+  <div class="box-title">Вывод</div>
+  <strong>Движущиеся часы идут медленнее!</strong> При $V \to c$ имеем $\gamma \to \infty$, при $V \ll c$ — $\gamma \approx 1 + \dfrac{V^2}{2c^2}$.
+</div>
+
+<h3 id="lengthcont">Сокращение продольных размеров тела</h3>
+
+<p>Релятивистский стержень с зеркалами на концах расположен в $S'$ по оси $x'$. Световой импульс пробежит вперёд-назад за время $\Delta t'$, а для неподвижного наблюдателя в $S$ — за время $\Delta t \neq \Delta t'$.</p>
+
+<div class="diagram">
+<svg width="560" height="200" viewBox="0 0 560 200">
+  <defs>
+    <marker id="ahl" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#c9a84c"/></marker>
+    <marker id="ahlr" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><polygon points="0,0 6,2 0,4" fill="#e55"/></marker>
+    <marker id="ahll" markerWidth="6" markerHeight="4" refX="0" refY="2" orient="auto"><polygon points="6,0 0,2 6,4" fill="#e55"/></marker>
+    <marker id="ahlb" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><polygon points="0,0 6,2 0,4" fill="#2c5f8a"/></marker>
+  </defs>
+
+  <!-- Система S' (покоя стержня) -->
+  <text x="15" y="18" font-size="13" fill="#1a3d5c" font-weight="bold" font-family="sans-serif">В системе S'</text>
+  <!-- стержень -->
+  <rect x="20" y="55" width="160" height="8" rx="2" fill="#e8f0f7" stroke="#2c5f8a" stroke-width="1.5"/>
+  <!-- зеркала -->
+  <line x1="20" y1="40" x2="20" y2="75" stroke="#1a3d5c" stroke-width="2.5"/>
+  <line x1="180" y1="40" x2="180" y2="75" stroke="#1a3d5c" stroke-width="2.5"/>
+  <!-- световой луч туда-обратно -->
+  <line x1="25" y1="50" x2="175" y2="50" stroke="#e55" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahlr)"/>
+  <line x1="175" y1="68" x2="24" y2="68" stroke="#e55" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#ahlr)"/>
+  <!-- подписи -->
+  <text x="10" y="85" font-size="11" fill="#555" font-family="serif">x'_A</text>
+  <text x="170" y="85" font-size="11" fill="#555" font-family="serif">x'_B</text>
+  <text x="75" y="90" font-size="12" fill="#e55" font-family="serif">c&#x00B7;&#x0394;t' = 2&#x00B7;l'</text>
+  <!-- ось x' -->
+  <line x1="10" y1="110" x2="200" y2="110" stroke="#555" stroke-width="1" marker-end="url(#ahlb)"/>
+  <text x="195" y="125" font-size="12" fill="#555" font-style="italic" font-family="serif">x'</text>
+
+  <!-- Система S (неподвижный наблюдатель) -->
+  <text x="260" y="18" font-size="13" fill="#1a3d5c" font-weight="bold" font-family="sans-serif">В системе S неподвижного</text>
+  <text x="260" y="33" font-size="13" fill="#1a3d5c" font-weight="bold" font-family="sans-serif">наблюдателя</text>
+  <!-- ось y -->
+  <line x1="260" y1="145" x2="260" y2="35" stroke="#555" stroke-width="1" marker-end="url(#ahlb)"/>
+  <text x="250" y="42" font-size="12" fill="#555" font-style="italic" font-family="serif">y</text>
+  <!-- стержень (позиция 1 — начальная, нижняя) -->
+  <rect x="330" y="115" width="100" height="6" rx="2" fill="#fff3cd" stroke="#c9a84c" stroke-width="1"/>
+  <text x="430" y="112" font-size="11" fill="#555" font-family="serif">A₂</text>
+  <!-- стержень (позиция 2 — через Δt₁, верхняя) -->
+  <rect x="290" y="60" width="100" height="6" rx="2" fill="#fff3cd" stroke="#c9a84c" stroke-width="1"/>
+  <text x="278" y="55" font-size="11" fill="#555" font-family="serif">A₁</text>
+  <!-- луч света вперёд (Δt₁): снизу вверх, вправо -->
+  <line x1="330" y1="115" x2="390" y2="63" stroke="#e55" stroke-width="2" marker-end="url(#ahlr)"/>
+  <text x="395" y="70" font-size="11" fill="#e55" font-family="serif">&#x0394;t₁ = &#x0394;t→</text>
+  <!-- луч света назад (Δt₂): от верхней позиции назад к нижней -->
+  <line x1="390" y1="63" x2="330" y2="115" stroke="#e55" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#ahlr)"/>
+  <text x="282" y="115" font-size="11" fill="#e55" font-family="serif">&#x0394;t₂ = &#x0394;t←</text>
+  <!-- вектор V -->
+  <line x1="440" y1="118" x2="480" y2="118" stroke="#c9a84c" stroke-width="2.5" marker-end="url(#ahl)"/>
+  <text x="485" y="122" font-size="14" fill="#c9a84c" font-weight="bold" font-family="serif">V</text>
+  <!-- ось x -->
+  <line x1="260" y1="145" x2="510" y2="145" stroke="#555" stroke-width="1" marker-end="url(#ahlb)"/>
+  <text x="510" y="160" font-size="12" fill="#555" font-style="italic" font-family="serif">x</text>
+  <!-- Δt = Δt₁ + Δt₂ -->
+  <text x="310" y="175" font-size="12" fill="#1a3d5c" font-weight="bold" font-family="serif">&#x0394;t = &#x0394;t₁ + &#x0394;t₂</text>
+</svg>
+</div>
+
+<div class="diagram">
+<svg width="360" height="115" viewBox="0 0 360 115">
+  <!-- длина в покое l' -->
+  <text x="5" y="42" font-size="12" fill="#888" font-family="sans-serif">В покое:</text>
+  <rect x="90" y="25" width="180" height="25" rx="4" fill="#e8f0f7" stroke="#2c5f8a" stroke-width="1.5"/>
+  <text x="165" y="43" font-size="14" fill="#2c5f8a" font-weight="bold" font-family="serif">L'</text>
+  <!-- длина в движении l -->
+  <text x="5" y="82" font-size="12" fill="#888" font-family="sans-serif">В движ.:</text>
+  <rect x="90" y="65" width="120" height="25" rx="4" fill="#fff3cd" stroke="#c9a84c" stroke-width="1.5"/>
+  <text x="138" y="83" font-size="14" fill="#c9a84c" font-weight="bold" font-family="serif">L</text>
+  <line x1="220" y1="77" x2="260" y2="77" stroke="#c9a84c" stroke-width="2" marker-end="url(#ahl)"/>
+  <text x="265" y="80" font-size="13" fill="#c9a84c" font-family="serif">V</text>
+  <!-- пояснение -->
+  <text x="90" y="110" font-size="12" fill="#e55" font-family="sans-serif">L &lt; L' — тело сокращается!</text>
+</svg>
+</div>
+
+<p>В системе $S'$ световой импульс пробегает вперёд-назад:</p>
+
+<div class="formula-box">
+$$c\Delta t_1 = L + V\Delta t_1, \qquad c\Delta t_2 = L - V\Delta t_2$$
+$$\Delta t = \Delta t_1 + \Delta t_2 = \dfrac{L}{c-V} + \dfrac{L}{c+V} = \dfrac{2L}{c\!\left(1 - \dfrac{V^2}{c^2}\right)}$$
+</div>
+
+<p>Используя $\Delta t = \gamma \Delta t'$ и $c\Delta t' = 2L'$:</p>
+
+<div class="formula-box">
+$$\boxed{L = L' \sqrt{1 - \dfrac{V^2}{c^2}} = \dfrac{L'}{\gamma}}$$
+$$L < L'$$
+</div>
+
+<p>Продольные размеры тела <strong>сокращаются</strong> при движении.</p>
+
+<h3 id="lorentz">Преобразования Лоренца координат</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Событие</strong> — совокупность пространственных координат и времени: $(t, x, y, z) = (x_0, x_1, x_2, x_3)$.
+</div>
+
+<p>Система $S'$ движется относительно $S$ со скоростью $V$ вдоль оси $x$. При $t_0 = t_0' = 0$, $x_0 = x_0' = 0$. Собственный продольный размер $x' \in S'$ в системе $S$ сокращён: $x = x'/\gamma$.</p>
+
+<div class="diagram" style="display:flex; align-items:center; gap:2rem; flex-wrap:wrap;">
+<svg width="300" height="200" viewBox="0 0 300 200">
+  <defs>
+    <marker id="ahlt" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#1a3d5c"/></marker>
+    <marker id="ahlv" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#2c5f8a"/></marker>
+    <marker id="ahlr2" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#c9a84c"/></marker>
+  </defs>
+  <!-- ось y (S) -->
+  <line x1="50" y1="170" x2="50" y2="20" stroke="#1a3d5c" stroke-width="1.5" marker-end="url(#ahlt)"/>
+  <text x="30" y="28" font-size="14" fill="#1a3d5c" font-style="italic" font-weight="bold" font-family="serif">y</text>
+  <text x="55" y="28" font-size="13" fill="#1a3d5c" font-weight="bold" font-family="sans-serif">S</text>
+  <!-- ось x (S) -->
+  <line x1="40" y1="160" x2="290" y2="160" stroke="#1a3d5c" stroke-width="1.5" marker-end="url(#ahlt)"/>
+  <text x="280" y="178" font-size="14" fill="#1a3d5c" font-style="italic" font-weight="bold" font-family="serif">x</text>
+  <!-- начало O -->
+  <text x="35" y="178" font-size="13" fill="#1a3d5c" font-weight="bold" font-style="italic" font-family="serif">O</text>
+  <!-- ось y' (S') — сдвинута вправо на Vt -->
+  <line x1="150" y1="155" x2="150" y2="20" stroke="#2c5f8a" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#ahlv)"/>
+  <text x="135" y="28" font-size="14" fill="#2c5f8a" font-style="italic" font-weight="bold" font-family="serif">y'</text>
+  <text x="158" y="28" font-size="13" fill="#2c5f8a" font-weight="bold" font-family="sans-serif">S'</text>
+  <!-- ось x' -->
+  <line x1="150" y1="155" x2="270" y2="155" stroke="#2c5f8a" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ahlv)"/>
+  <!-- O' -->
+  <text x="138" y="178" font-size="13" fill="#2c5f8a" font-weight="bold" font-style="italic" font-family="serif">O'</text>
+  <!-- Vt стрелка -->
+  <line x1="52" y1="112" x2="148" y2="112" stroke="#c9a84c" stroke-width="2" marker-end="url(#ahlr2)"/>
+  <text x="85" y="125" font-size="13" fill="#c9a84c" font-weight="bold" font-style="italic" font-family="serif">Vt</text>
+  <!-- x' отрезок -->
+  <rect x="152" y="148" width="80" height="6" rx="2" fill="#e55" opacity="0.2"/>
+  <line x1="152" y1="148" x2="232" y2="148" stroke="#e55" stroke-width="2"/>
+  <text x="190" y="144" font-size="13" fill="#e55" font-weight="bold" font-style="italic" font-family="serif">x'</text>
+</svg>
+<div style="font-size:1rem;">
+$$x = Vt + x' \sqrt{1 - \dfrac{V^2}{c^2}}$$
+$$\Rightarrow\; x' = \dfrac{x - Vt}{\sqrt{1 - \dfrac{V^2}{c^2}}}$$
+$$y' = y, \quad z' = z$$
+</div>
+</div>
+
+<div class="formula-box">
+$$x' = \dfrac{x - Vt}{\sqrt{1 - \dfrac{V^2}{c^2}}}, \qquad t' = \dfrac{t - \dfrac{Vx}{c^2}}{\sqrt{1 - \dfrac{V^2}{c^2}}}$$
+$$x = \dfrac{x' + Vt'}{\sqrt{1 - \dfrac{V^2}{c^2}}}, \qquad t = \dfrac{t' + \dfrac{Vx'}{c^2}}{\sqrt{1 - \dfrac{V^2}{c^2}}}$$
+$$y' = y, \qquad z' = z$$
+</div>
+
+<h4>Матрица преобразований Лоренца</h4>
+
+<p>4-вектор: $(x_0, x_1, x_2, x_3) = (ct, x, y, z)$.</p>
+
+<div class="formula-box">
+$$\begin{pmatrix} x_0' \\ x_1' \\ x_2' \\ x_3' \end{pmatrix} = \begin{pmatrix} \gamma & -\gamma\beta & 0 & 0 \\ -\gamma\beta & \gamma & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} x_0 \\ x_1 \\ x_2 \\ x_3 \end{pmatrix}$$
+</div>
+
+<p>Обратное преобразование: $\mathbf{x} = [L]^{-1} \mathbf{x}'$ (заменяем $\beta \to -\beta$).</p>
+
+<h3 id="veltrans">Преобразования скорости</h3>
+
+<p><strong>Вывод.</strong> По определению $v_x = \dfrac{dx}{dt}$. Беря дифференциалы преобразований Лоренца:</p>
+<div class="formula-box">
+$$dx = \gamma\,(dx' + V\,dt'), \qquad dy = dy', \qquad dz = dz', \qquad dt = \gamma\!\left(dt' + \dfrac{V\,dx'}{c^2}\right)$$
+</div>
+
+<p>Делим $dx$ на $dt$ и сокращаем $\gamma$:</p>
+<div class="formula-box">
+$$v_x = \dfrac{dx}{dt} = \dfrac{\gamma(dx' + V\,dt')}{\gamma\!\left(dt' + \dfrac{V\,dx'}{c^2}\right)} = \dfrac{\dfrac{dx'}{dt'} + V}{1 + \dfrac{V}{c^2}\dfrac{dx'}{dt'}}$$
+</div>
+
+<p>Аналогично для поперечных компонент $v_y, v_z$ (числители без $\gamma$, знаменатели с $\gamma$):</p>
+
+<div class="formula-box">
+$$\boxed{v_x = \dfrac{v_x' + V}{1 + \dfrac{V v_x'}{c^2}}}$$
+$$v_y = \dfrac{v_y'}{\gamma\!\left(1 + \dfrac{V v_x'}{c^2}\right)}, \qquad v_z = \dfrac{v_z'}{\gamma\!\left(1 + \dfrac{V v_x'}{c^2}\right)}$$
+</div>
+
+<p>В классическом пределе $c\to\infty$ эти формулы переходят в галилеевское $\vec{v} = {\vec{v}}' + \vec{V}$. При $v_x' = c$ получаем $v_x = c$ — постоянство скорости света.</p>
+
+<h3 id="interval">Интервал</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Квадрат интервала</strong> между событиями 1 и 2:
+  $$S_{12}^2 = c^2(t_1 - t_2)^2 - \left[(x_1-x_2)^2 + (y_1-y_2)^2 + (z_1-z_2)^2\right]$$
+</div>
+
+<p>Интервал <strong>инвариантен</strong>: $S_{12}^2 = S_{12}'^2$.</p>
+
+<table>
+  <tr><th>Условие</th><th>Тип интервала</th><th>$S_{12}^2$</th></tr>
+  <tr><td>$(c\Delta t)^2 = (\Delta r)^2$</td><td>светоподобный</td><td>$= 0$</td></tr>
+  <tr><td>$(c\Delta t)^2 > (\Delta r)^2$</td><td>времениподобный</td><td>$> 0$</td></tr>
+  <tr><td>$(c\Delta t)^2 < (\Delta r)^2$</td><td>пространственноподобный</td><td>$< 0$</td></tr>
+</table>
+
+<h4>Световой конус</h4>
+
+<div class="diagram">
+<svg width="440" height="380" viewBox="0 0 440 380">
+  <defs>
+    <marker id="ahlc" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#1a3d5c"/></marker>
+  </defs>
+  <!-- оси -->
+  <line x1="200" y1="350" x2="200" y2="15" stroke="#1a3d5c" stroke-width="1.5" marker-end="url(#ahlc)"/>
+  <text x="208" y="25" font-size="14" fill="#1a3d5c" font-weight="bold" font-style="italic" font-family="serif">ct</text>
+  <line x1="15" y1="190" x2="410" y2="190" stroke="#1a3d5c" stroke-width="1.5" marker-end="url(#ahlc)"/>
+  <text x="415" y="195" font-size="14" fill="#1a3d5c" font-weight="bold" font-style="italic" font-family="serif">x</text>
+  <!-- точка O -->
+  <circle cx="200" cy="190" r="3" fill="#1a3d5c"/>
+  <text x="183" y="207" font-size="13" fill="#1a3d5c" font-weight="bold" font-style="italic" font-family="serif">O</text>
+  <!-- образующие светового конуса x = ±ct -->
+  <line x1="40" y1="30" x2="360" y2="350" stroke="#e55" stroke-width="1.5"/>
+  <line x1="360" y1="30" x2="40" y2="350" stroke="#e55" stroke-width="1.5"/>
+  <!-- подписи образующих -->
+  <text x="345" y="55" font-size="12" fill="#e55" font-style="italic" font-family="serif">x = +ct</text>
+  <text x="18" y="55" font-size="12" fill="#e55" font-style="italic" font-family="serif">x = −ct</text>
+  <!-- буквы a, b, c, d -->
+  <text x="370" y="40" font-size="15" fill="#e55" font-weight="bold" font-family="serif">a</text>
+  <text x="22" y="40" font-size="15" fill="#e55" font-weight="bold" font-family="serif">c</text>
+  <text x="22" y="360" font-size="15" fill="#e55" font-weight="bold" font-family="serif">b</text>
+  <text x="370" y="360" font-size="15" fill="#e55" font-weight="bold" font-family="serif">d</text>
+  <!-- верхний конус (будущее) — заливка -->
+  <path d="M 200 190 L 60 50 L 200 90 L 340 50 Z" fill="#2c5f8a" opacity="0.1"/>
+  <!-- нижний конус (прошлое) — заливка -->
+  <path d="M 200 190 L 60 330 L 200 290 L 340 330 Z" fill="#2c5f8a" opacity="0.1"/>
+  <!-- подписи зон — будущее -->
+  <text x="135" y="120" font-size="12" fill="#2c5f8a" font-family="sans-serif" font-style="italic">Абсолютно будущие</text>
+  <text x="165" y="132" font-size="12" fill="#2c5f8a" font-family="sans-serif" font-style="italic">события</text>
+  <text x="215" y="145" font-size="11" fill="#2c5f8a" font-family="sans-serif">t &gt; 0</text>
+  <!-- подписи зон — прошлое -->
+  <text x="135" y="280" font-size="12" fill="#2c5f8a" font-family="sans-serif" font-style="italic">Абсолютно прошедшие</text>
+  <text x="165" y="297" font-size="12" fill="#2c5f8a" font-family="sans-serif" font-style="italic">события</text>
+  <text x="215" y="265" font-size="11" fill="#2c5f8a" font-family="sans-serif">t &lt; 0</text>
+  <!-- боковые зоны — слева -->
+  <text x="15" y="180" font-size="11" fill="#888" font-family="sans-serif">Абсолютно</text>
+  <text x="15" y="200" font-size="11" fill="#888" font-family="sans-serif">удалённые</text>
+  <!-- боковые зоны — справа -->
+  <text x="330" y="180" font-size="11" fill="#888" font-family="sans-serif">Абсолютно</text>
+  <text x="330" y="200" font-size="11" fill="#888" font-family="sans-serif">удалённые</text>
+</svg>
+</div>
+
+<p>Световой конус ограничен образующими $x = \pm ct$. В областях $aOc$ и $bOd$: $(ct)^2 - x^2 > 0$ — интервалы <strong>времениподобны</strong>. Вне конуса: $(ct)^2 < x^2$ — интервалы <strong>пространственноподобны</strong>, события причинно не связаны.</p>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §7</div>
+  Для <strong>времениподобных</strong> событий ($S_{12}^2 > 0$) существует ИСО, в которой они происходят в одной точке, но <em>нет</em> ИСО, где они одновременны. Если второе событие позже первого ($t_2 > t_1$), то это верно в <em>любой</em> ИСО — причинно-следственная связь абсолютна.
+  <br><br>
+  Для <strong>пространственноподобных</strong> событий ($S_{12}^2 < 0$) существует ИСО, где они одновременны, но нет ИСО, где они в одной точке — причинная связь между ними невозможна.
+</div>
+
+<h4>Собственное время</h4>
+
+<p>Для близких событий:</p>
+<div class="formula-box">
+$$dS_{12} = \sqrt{c^2 dt^2 - (dx^2 + dy^2 + dz^2)} = c \cdot dt \cdot \sqrt{1 - \dfrac{v^2}{c^2}}$$
+</div>
+
+<div class="formula-box">
+$$d\tau = \dfrac{dS_{12}}{c} = \dfrac{dt}{\gamma}$$
+</div>
+
+<p>Собственное время — время частицы в СО, где частица покоится. Совпадает с отношением интервала к $c$.</p>
+
+<h3 id="fourvec">4-векторы</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>4-вектор</strong> — вектор в четырёхмерном пространстве-времени: временная компонента + 3 пространственных.
+</div>
+
+<p><strong>4-радиус-вектор</strong> (вектор события): $X_\mu = (X_0, X_1, X_2, X_3) = (ct, \vec{r})$.</p>
+
+<p><strong>Квадрат 4-радиус-вектора:</strong></p>
+<div class="formula-box">
+$$(X_\mu)^2 = X_0^2 - r^2 = (ct)^2 - (x^2 + y^2 + z^2)$$
+</div>
+
+<p>Это <strong>инвариант</strong> (не меняется при преобразованиях Лоренца), аналогично квадрату интервала.</p>
+
+<div class="note">
+  <div class="box-title">Прямое доказательство инвариантности</div>
+  Подставим $X'_0 = \gamma(X_0 - \beta X_1)$, $X'_1 = \gamma(X_1 - \beta X_0)$, $X'_2 = X_2$, $X'_3 = X_3$:
+  $$(X'_\mu)^2 = \gamma^2(X_0 - \beta X_1)^2 - \gamma^2(X_1 - \beta X_0)^2 - X_2^2 - X_3^2$$
+  $$= \gamma^2\!\left[X_0^2 - 2\beta X_0 X_1 + \beta^2 X_1^2 - X_1^2 + 2\beta X_0 X_1 - \beta^2 X_0^2\right] - X_2^2 - X_3^2$$
+  $$= \gamma^2(1-\beta^2)(X_0^2 - X_1^2) - X_2^2 - X_3^2 = X_0^2 - X_1^2 - X_2^2 - X_3^2 = (X_\mu)^2$$
+  (использовано $\gamma^2(1-\beta^2) = 1$).
+</div>
+
+<p><strong>4-вектор в общем случае:</strong> $A_\mu = (A_0, \vec{A}) = (A_0, A_x, A_y, A_z)$.</p>
+
+<p>Преобразования Лоренца для произвольного 4-вектора:</p>
+<div class="formula-box">
+$$A_0 = \gamma(A_0' + \beta A_x'), \qquad A_x = \gamma(A_x' + \beta A_0')$$
+$$A_y = A_y', \qquad A_z = A_z'$$
+</div>
+
+<p><strong>Скалярное произведение 4-векторов:</strong></p>
+<div class="formula-box">
+$$A_\mu B_\mu = A_0 B_0 - \vec{A} \cdot \vec{B} = \text{inv}$$
+</div>
+
+<h4>ССО и ЛСО</h4>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>ССО</strong> (собственная система отсчёта) — система, где рассматриваемое тело покоится.<br>
+  <strong>ЛСО</strong> (лабораторная система отсчёта) — система, где детекторы и датчики покоятся, а тело движется. Используется для описания движения.
+</div>
+
+<h3 id="fourvel">4-скорость и 4-импульс</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>4-скорость</strong> — производная 4-вектора $X_\mu$ по собственному времени $\tau$:
+  $$v_\mu = \dfrac{dX_\mu}{d\tau}$$
+</div>
+
+<p>Так как $d\tau = \dfrac{dt}{\gamma}$ и $dX_0 = c \cdot dt$:</p>
+
+<div class="formula-box">
+$$v_0 = \dfrac{dX_0}{d\tau} = c \gamma, \qquad v_i = \dfrac{dX_i}{d\tau} = v_x \gamma$$
+$$\Rightarrow \quad v_\mu = (c\gamma, \, \vec{v}\gamma)$$
+</div>
+
+<p><strong>Квадрат 4-скорости:</strong></p>
+<div class="formula-box">
+$$(v_\mu)^2 = c^2\gamma^2 - v^2\gamma^2 = \dfrac{c^2 - v^2}{1 - \dfrac{v^2}{c^2}} = c^2 = \text{inv}$$
+</div>
+
+<h4>4-импульс</h4>
+
+<p>Классический импульс: $\vec{P} = m\vec{v}$, кг$\cdot$м/с.</p>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>4-импульс:</strong>
+  $$P_\mu = m \cdot v_\mu = (mc\gamma, \, m\vec{v}\gamma)$$
+  где $m$ — масса покоя.
+</div>
+
+<p>В релятивизме иногда говорят, что «масса увеличивается»: $m_{\text{рел}} = \dfrac{m_0}{\sqrt{1 - \dfrac{V^2}{c^2}}}$, но важно помнить, что $m$ здесь — масса покоя.</p>
+
+
+<!-- нерелятивистская динамика -->
+<h2 id="dynamics">4. Нерелятивистская динамика</h2>
+
+<h3 id="force">Сила. Законы Ньютона</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Сила</strong> — векторная величина, характеризующая меру механического взаимодействия тел. Единица: Н (ньютон).
+  $$1 \text{ Н} = 1 \dfrac{\text{кг} \cdot \text{м}}{\text{с}^2}$$
+</div>
+
+<p>Если скорость частицы не постоянна — на неё действуют внешние тела через силы.</p>
+
+<p>Сила измеряется <strong>динамометром</strong>: $F = k \Delta l = k(l - l_0)$, где $k$ — жёсткость пружины.</p>
+
+<div class="diagram">
+<svg width="300" height="80" viewBox="0 0 300 80">
+  <defs><marker id="ahf" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#e55"/></marker></defs>
+  <!-- стена -->
+  <line x1="30" y1="20" x2="30" y2="65" stroke="#1a3d5c" stroke-width="2"/>
+  <line x1="20" y1="20" x2="30" y2="30" stroke="#888" stroke-width="1"/>
+  <line x1="20" y1="30" x2="30" y2="40" stroke="#888" stroke-width="1"/>
+  <line x1="20" y1="40" x2="30" y2="50" stroke="#888" stroke-width="1"/>
+  <line x1="20" y1="50" x2="30" y2="60" stroke="#888" stroke-width="1"/>
+  <!-- пружина -->
+  <polyline points="30,42 45,32 55,52 65,32 75,52 85,32 95,52 105,32 115,52 125,42" stroke="#2c5f8a" stroke-width="2" fill="none"/>
+  <!-- тело массой m -->
+  <rect x="125" y="28" width="35" height="28" rx="3" fill="#e8f0f7" stroke="#2c5f8a" stroke-width="1.5"/>
+  <text x="135" y="47" font-size="13" fill="#2c5f8a" font-family="serif">m</text>
+  <!-- вектор силы f -->
+  <line x1="160" y1="42" x2="210" y2="42" stroke="#e55" stroke-width="2" marker-end="url(#ahf)"/>
+  <text x="215" y="46" font-size="14" fill="#e55" font-family="serif">F</text>
+  <!-- удлинение пружины δl -->
+  <line x1="125" y1="68" x2="160" y2="68" stroke="#888" stroke-width="1"/>
+  <text x="135" y="78" font-size="11" fill="#888" font-family="serif">&#x0394;l</text>
+</svg>
+</div>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Равнодействующая сила</strong> — векторная сумма всех сил, действующих на тело (принцип суперпозиции):
+  $$\vec{F} = \vec{F}_1 + \vec{F}_2 = \sum_i \vec{F}_i$$
+</div>
+
+<h4>II закон Ньютона</h4>
+<p>Ускорение тела прямо пропорционально равнодействующей сил, приложенных к телу, и сонаправлено с ней: $\vec{F} \parallel \vec{a}$.</p>
+
+<div class="formula-box">
+$$\boxed{\vec{F} = m\vec{a}}$$
+</div>
+
+<p><strong>Масса</strong> — мера инертности тела: $m = \dfrac{F}{a}$. Инертность — способность тела сохранять свою скорость при действии сил. Масса одинакова в различных ИСО.</p>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §8, §10</div>
+  <strong>Альтернативное определение силы</strong> (через импульс): сила — это производная импульса по времени: $\vec{F}_i = \dfrac{d\vec{p}_i}{dt}$. Это определение более фундаментально и работает в том числе при переменной массе. Из закона сохранения импульса замкнутой системы двух частиц ($\vec{p}_1 + \vec{p}_2 = \text{const}$) следует $\dfrac{d\vec{p}_1}{dt} = -\dfrac{d\vec{p}_2}{dt}$, т.е. III закон Ньютона.
+  <br><br>
+  <strong>Область применимости</strong> законов Ньютона: вся нерелятивистская классическая механика. В релятивистской области необходимо учитывать поля и запаздывание взаимодействия ($c < \infty$). В квантовой механике понятие траектории теряет точный смысл.
+</div>
+
+<table>
+  <tr><th>Система</th><th>$l$</th><th>$m$</th><th>$t$</th><th>Энергия</th><th>Сила</th></tr>
+  <tr><td>СИ</td><td>м</td><td>кг</td><td>с</td><td>Дж</td><td>Н</td></tr>
+  <tr><td>CGS</td><td>см</td><td>г</td><td>с</td><td>эрг</td><td>дина</td></tr>
+</table>
+
+<h4>III закон Ньютона</h4>
+
+<div class="diagram">
+<svg width="280" height="90" viewBox="0 0 280 90">
+  <defs>
+    <marker id="ahfl" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#e55"/></marker>
+    <marker id="ahfb" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#2c5f8a"/></marker>
+  </defs>
+  <!-- тело i -->
+  <circle cx="80" cy="45" r="22" fill="#e8f0f7" stroke="#2c5f8a" stroke-width="1.5"/>
+  <text x="74" y="49" font-size="15" fill="#2c5f8a" font-family="serif">i</text>
+  <!-- тело j -->
+  <circle cx="200" cy="45" r="22" fill="#fff3cd" stroke="#c9a84c" stroke-width="1.5"/>
+  <text x="194" y="49" font-size="15" fill="#c9a84c" font-family="serif">j</text>
+  <!-- сила f_i→j -->
+  <line x1="103" y1="38" x2="173" y2="38" stroke="#e55" stroke-width="2.5" marker-end="url(#ahfl)"/>
+  <text x="125" y="30" font-size="12" fill="#e55" font-family="serif">F<tspan font-size="8" dy="3">i&#x2192;j</tspan></text>
+  <!-- сила f_j→i -->
+  <line x1="177" y1="55" x2="107" y2="55" stroke="#2c5f8a" stroke-width="2.5" marker-end="url(#ahfb)"/>
+  <text x="125" y="75" font-size="12" fill="#2c5f8a" font-family="serif">F<tspan font-size="8" dy="3">j&#x2192;i</tspan></text>
+</svg>
+</div>
+
+<p>Силы, с которыми тела действуют друг на друга, равны по модулю и противоположны по направлению (возникают парами, приложены к <em>разным</em> телам):</p>
+
+<div class="formula-box">
+$$\boxed{\vec{F}_{i \to j} = -\vec{F}_{j \to i}}$$
+</div>
+
+<h3 id="covariance">Ковариантность уравнений механики</h3>
+
+<p>Уравнение движения для системы частиц:</p>
+<div class="formula-box">
+$$m_i \dfrac{d^2\vec{r}_i}{dt^2} = \sum_{j \neq i} \vec{F}_{ij}(\vec{r}_j - \vec{r}_i)$$
+</div>
+
+<p>Сила зависит только от радиус-вектора между телами. При переходе $\vec{r}_i' = \vec{r}_i + \vec{V}t$ ускорение не меняется ($\dfrac{d^2\vec{r}_i'}{dt^2} = \dfrac{d^2\vec{r}_i}{dt^2}$), и разность $\vec{r}_j - \vec{r}_i = \vec{r}_j' - \vec{r}_i'$ — уравнение имеет тот же вид. Это и есть <strong>ковариантность</strong>.</p>
+
+<h3 id="examples-dyn">Примеры</h3>
+
+<h4>Периодическая сила</h4>
+
+<p>Пусть $F(t) = F_0 \cos(\omega t)$, где $\omega$ — циклическая частота (рад/с), $T = \dfrac{2\pi}{\omega}$ — период, $\nu = \dfrac{1}{T}$ — частота (Гц).</p>
+
+<div class="diagram">
+<svg width="280" height="120" viewBox="0 0 280 120">
+  <defs><marker id="ahx" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><polygon points="0,0 6,2 0,4" fill="#1a3d5c"/></marker></defs>
+  <!-- оси графика -->
+  <line x1="30" y1="60" x2="260" y2="60" stroke="#1a3d5c" stroke-width="1" marker-end="url(#ahx)"/>
+  <line x1="30" y1="110" x2="30" y2="10" stroke="#1a3d5c" stroke-width="1" marker-end="url(#ahx)"/>
+  <text x="264" y="58" font-size="12" fill="#1a3d5c" font-style="italic" font-family="serif">t</text>
+  <text x="18" y="12" font-size="12" fill="#1a3d5c" font-style="italic" font-family="serif">F</text>
+  <!-- уровень f_0 -->
+  <line x1="28" y1="25" x2="33" y2="25" stroke="#888" stroke-width="1"/>
+  <text x="8" y="29" font-size="11" fill="#888" font-family="serif">F&#x2080;</text>
+  <!-- косинусоида -->
+  <path d="M 30 25 Q 60 25 75 60 Q 90 95 120 95 Q 150 95 165 60 Q 180 25 210 25 Q 240 25 250 60" stroke="#2c5f8a" stroke-width="2" fill="none"/>
+  <!-- метка периода t -->
+  <line x1="30" y1="105" x2="165" y2="105" stroke="#888" stroke-width="1"/>
+  <line x1="30" y1="102" x2="30" y2="108" stroke="#888" stroke-width="1"/>
+  <line x1="165" y1="102" x2="165" y2="108" stroke="#888" stroke-width="1"/>
+  <text x="85" y="115" font-size="11" fill="#888" font-family="serif">T = 2&#x03C0;/&#x03C9;</text>
+</svg>
+</div>
+
+<p>$ma(t) = F_0 \cos(\omega t)$, тогда $a(t) = \dfrac{F_0}{m}\cos(\omega t)$.</p>
+
+<div class="formula-box">
+$$v(t) = \int a \, dt = \dfrac{F_0}{m\omega}\sin(\omega t) + C$$
+$$x(t) = \int v \, dt = -\dfrac{F_0}{m\omega^2}\cos(\omega t) + v_0 t + x_0$$
+</div>
+
+<p>При $t=0$: $v_0 = 0$, $x(0) = 0$ $\Rightarrow$ $x_0 = \dfrac{F_0}{m\omega^2}$:</p>
+
+<div class="formula-box">
+$$\boxed{x(t) = \dfrac{F_0}{m\omega^2}\big(1 - \cos(\omega t)\big)}$$
+</div>
+
+<h4>Сила сопротивления (трение о воздух)</h4>
+
+<p>Тело летит под действием силы тяжести и линейной силы сопротивления:</p>
+<div class="formula-box">
+$$\vec{F} = m\vec{g} - k\vec{v}, \qquad k = \text{const}$$
+</div>
+
+<p>Решение:</p>
+<div class="formula-box">
+$$v(t) = v_0 \, e^{-\dfrac{kt}{m}} + \dfrac{mg}{k}\left(1 - e^{-\dfrac{kt}{m}}\right)$$
+</div>
+
+<p>Числ. метод: разбиваем время $T$ на $N$ шагов, $\tau = \dfrac{T}{N}$, $t_i = i\tau$, $\dfrac{dv}{dt} \approx \dfrac{v_{i+1} - v_i}{\tau}$.</p>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §8</div>
+  <strong>Устойчивость численной схемы:</strong> для явной разностной схемы (метод Эйлера) шаг сетки $\tau$ должен удовлетворять условию $\dfrac{\tau k}{m} \ll 1$, иначе решение будет неустойчивым. Существуют более точные <strong>неявные схемы</strong> (второго порядка аппроксимации, ошибка $\sim \tau^2$), где значения на $(i+1)$-м шаге входят в правую часть:
+  $$U_{i+1} = U_i - \dfrac{\tau k}{m} \cdot \dfrac{U_i + U_{i+1}}{2}$$
+</div>
+
+<h3 id="momentum">Закон сохранения импульса</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Импульс силы</strong> — произведение силы на время действия:
+  $$d\vec{P} = \vec{F} \, dt$$
+  <strong>Связь силы и импульса:</strong>
+  $$\vec{F} = \dfrac{d\vec{P}}{dt} = \dfrac{d(m\vec{v})}{dt} = m \dfrac{d\vec{v}}{dt} = m\vec{a}$$
+  Верно и при $m \neq \text{const}$: $\vec{F} = \dfrac{d\vec{P}}{dt}$.
+</div>
+
+<p>Если $F = \text{const}$: $\Delta\vec{P} = \vec{F} \cdot \tau$. Если $F = F(t)$: $\Delta\vec{P} = \int_{t_0}^{t_1} \vec{F} \, dt$.</p>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Замкнутая система</strong> — совокупность тел, взаимодействующих только друг с другом и никак не взаимодействующих с внешними телами.
+</div>
+
+<p>В замкнутой системе по III закону Ньютона:</p>
+<div class="formula-box">
+$$\vec{F}_\Sigma = \sum_i \vec{F}_i = \sum_i \sum_{j \neq i} \vec{F}_{ij} = 0 \quad \Rightarrow \quad \dfrac{d\vec{P}_\Sigma}{dt} = 0 \quad \Rightarrow \quad \boxed{\vec{P}_\Sigma = \text{const}}$$
+</div>
+
+<p><strong>Импульс замкнутой системы сохраняется.</strong></p>
+
+<div class="example">
+  <div class="box-title">Пример: вагон с нарастающей массой</div>
+  Вагон движется под действием силы $F$, масса увеличивается: $m(t) = m + \mu t$. Начальная скорость $v = 0$.
+  $$\Delta P = P(t) = (m + \mu t) \cdot v(t) = Ft$$
+  $$v(t) = \dfrac{Ft}{m + \mu t} \quad \xrightarrow{t \to \infty} \quad v = \dfrac{F}{\mu}$$
+</div>
+
+<h3 id="com">Центр масс</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Центр масс</strong> системы частиц — точка, движение которой под действием внешних сил описывает движение всей системы (взвешенное среднее положение):
+  $$\vec{R} = \dfrac{\sum m_i \vec{r}_i}{\sum m_i} = \dfrac{\sum m_i \vec{r}_i}{M}, \quad M = \sum m_i$$
+</div>
+
+<div class="formula-box">
+$$\dfrac{d\vec{R}}{dt} = \dfrac{\sum m_i \vec{v}_i}{M} = \dfrac{\vec{P}_\Sigma}{M} = \vec{V}_\text{цм}$$
+$$\vec{F}_\Sigma = \dfrac{d\vec{P}_\Sigma}{dt} = M \vec{a}_\text{цм}$$
+</div>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §9</div>
+  <strong>Закон аддитивности масс:</strong> масса сложного тела равна сумме масс его частей ($M = \sum m_i$). Это прямое следствие законов Ньютона. В <strong>релятивистской</strong> механике уравнения Ньютона неприменимы и закон аддитивности масс <em>не выполняется</em> (масса системы зависит от энергии связи).
+</div>
+
+<div class="example">
+  <div class="box-title">Пример: ц.м. гантельки</div>
+  <div class="diagram">
+  <svg width="260" height="70" viewBox="0 0 260 70">
+    <line x1="40" y1="25" x2="200" y2="25" stroke="#ccc" stroke-width="2"/>
+    <circle cx="40" cy="25" r="14" fill="#e8f0f7" stroke="#2c5f8a" stroke-width="1.5"/>
+    <text x="33" y="29" font-size="13" fill="#2c5f8a" font-family="serif">m</text>
+    <circle cx="200" cy="25" r="18" fill="#fff3cd" stroke="#c9a84c" stroke-width="1.5"/>
+    <text x="193" y="29" font-size="13" fill="#c9a84c" font-family="serif">M</text>
+    <text x="112" y="18" font-size="12" fill="#888" font-style="italic" font-family="serif">L</text>
+    <!-- метка центра масс -->
+    <line x1="145" y1="44" x2="145" y2="32" stroke="#e55" stroke-width="2"/>
+    <polygon points="145,30 142,36 148,36" fill="#e55"/>
+    <text x="132" y="58" font-size="11" fill="#e55" font-family="sans-serif">ц.м.</text>
+  </svg>
+  </div>
+  $$X_\text{цм} = \dfrac{m \cdot 0 + M \cdot L}{m + M} = \dfrac{ML}{m+M}$$
+</div>
+
+<div class="example">
+  <div class="box-title">Пример: ц.м. равностороннего треугольника</div>
+  Сторона $a$, масса распределена равномерно. Высота $h = \dfrac{a\sqrt{3}}{2}$, поверхностная плотность $\rho = \dfrac{m}{S}$.
+  Разделим на полоски $dx$, $y(x) = \dfrac{x}{\sqrt{3}}$:
+  $$X_\text{цм} = \dfrac{\int_0^h x \cdot \rho \cdot 2y(x) \, dx}{m} = \ldots = \dfrac{a}{\sqrt{3}}$$
+  Центр масс на высоте $\dfrac{1}{3}$ медианы.
+</div>
+
+<h3 id="gravity-ex">Пример: всемирное тяготение и орбиты</h3>
+
+<div class="formula-box">
+$$F = G \dfrac{m_1 m_2}{r^2}, \qquad G = 6{,}67 \cdot 10^{-11} \dfrac{\text{Н} \cdot \text{м}^2}{\text{кг}^2}$$
+</div>
+
+<div class="diagram">
+<svg width="240" height="190" viewBox="0 0 240 190">
+  <defs><marker id="aho" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><polygon points="0,0 6,2 0,4" fill="#2c5f8a"/></marker></defs>
+  <!-- орбиты -->
+  <circle cx="120" cy="95" r="60" stroke="#ccc" stroke-width="1" fill="none" stroke-dasharray="4,3"/>
+  <circle cx="120" cy="95" r="25" stroke="#ddd" stroke-width="1" fill="none" stroke-dasharray="4,3"/>
+  <!-- центр масс -->
+  <circle cx="120" cy="95" r="3" fill="#888"/>
+  <text x="126" y="92" font-size="11" fill="#888" font-family="sans-serif">ц.м.</text>
+  <!-- тело M -->
+  <circle cx="95" cy="95" r="12" fill="#e8f0f7" stroke="#2c5f8a" stroke-width="1.5"/>
+  <text x="89" y="99" font-size="12" fill="#2c5f8a" font-family="serif">M</text>
+  <!-- тело m -->
+  <circle cx="180" cy="95" r="8" fill="#fff3cd" stroke="#c9a84c" stroke-width="1.5"/>
+  <text x="175" y="99" font-size="12" fill="#c9a84c" font-family="serif">m</text>
+  <!-- расстояние L -->
+  <line x1="95" y1="115" x2="180" y2="115" stroke="#888" stroke-width="1"/>
+  <text x="130" y="128" font-size="12" fill="#888" font-style="italic" font-family="serif">L</text>
+  <!-- подпись -->
+  <text x="55" y="180" font-size="12" fill="#555" font-family="sans-serif">Обе тела вращаются</text>
+  <text x="65" y="15" font-size="12" fill="#555" font-family="sans-serif">вокруг общего ц.м.</text>
+</svg>
+</div>
+
+<p>Две частицы $M$ и $m$ на орбитах вокруг общего центра масс на расстоянии $L$. По II закону Ньютона для каждой:</p>
+<div class="formula-box">
+$$\omega^2 L^3 = G(M + m) \quad \Rightarrow \quad \omega^2 = G \dfrac{M+m}{L^3}$$
+</div>
+
+<p>Рассмотрим задачу взаимодействия двух частиц с массами $m_1$, $m_2$. На частицы действуют силы: $\vec{F}_{12} = \vec{F}(\vec{r}_1 - \vec{r}_2)$, $\vec{F}_{21} = -\vec{F}(\vec{r}_1 - \vec{r}_2)$.</p>
+
+<div class="diagram">
+<svg width="340" height="250" viewBox="0 0 340 250">
+  <defs>
+    <marker id="ah2b1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#2c5f8a"/></marker>
+    <marker id="ah2b2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#c9a84c"/></marker>
+    <marker id="ah2r" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#e55"/></marker>
+    <marker id="ah2g" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#555"/></marker>
+  </defs>
+  <!-- начало координат O -->
+  <circle cx="55" cy="210" r="4" fill="#e55"/>
+  <text x="40" y="235" font-size="16" fill="#e55" font-weight="bold" font-family="serif" font-style="italic">O</text>
+  <!-- радиус-вектор r1 (O → m1) -->
+  <line x1="55" y1="210" x2="123" y2="82" stroke="#e55" stroke-width="2" marker-end="url(#ah2r)"/>
+  <text x="62" y="152" font-size="14" fill="#e55" font-weight="bold" font-family="serif" font-style="italic">r<tspan font-size="10" dy="3">1</tspan></text>
+  <!-- радиус-вектор r2 (O → m2) -->
+  <line x1="55" y1="210" x2="243" y2="82" stroke="#e55" stroke-width="2" marker-end="url(#ah2r)"/>
+  <text x="160" y="170" font-size="14" fill="#e55" font-weight="bold" font-family="serif" font-style="italic">r<tspan font-size="10" dy="3">2</tspan></text>
+  <!-- частица m1 -->
+  <circle cx="130" cy="78" r="7" fill="#e8f0f7" stroke="#2c5f8a" stroke-width="2"/>
+  <text x="125" y="62" font-size="14" fill="#2c5f8a" font-family="serif" font-style="italic">m<tspan font-size="10" dy="3">1</tspan></text>
+  <!-- частица m2 -->
+  <circle cx="250" cy="78" r="7" fill="#fff3cd" stroke="#c9a84c" stroke-width="2"/>
+  <text x="245" y="62" font-size="14" fill="#c9a84c" font-family="serif" font-style="italic">m<tspan font-size="10" dy="3">2</tspan></text>
+  <!-- вектор r1 - r2 (от m2 к m1) -->
+  <line x1="243" y1="78" x2="138" y2="78" stroke="#555" stroke-width="2" marker-end="url(#ah2g)"/>
+  <text x="162" y="70" font-size="13" fill="#555" font-weight="bold" font-family="serif" font-style="italic">r<tspan font-size="10" dy="3">1</tspan><tspan dy="-3"> − r</tspan><tspan font-size="10" dy="3">2</tspan></text>
+  <!-- сила F12 (на m1, направлена влево) -->
+  <line x1="123" y1="78" x2="55" y2="78" stroke="#2c5f8a" stroke-width="2.5" marker-end="url(#ah2b1)"/>
+  <text x="55" y="50" font-size="13" fill="#2c5f8a" font-weight="bold" font-family="serif" font-style="italic">F<tspan font-size="9" dy="3">12</tspan></text>
+  <!-- сила F21 (на m2, направлена вправо) -->
+  <line x1="257" y1="78" x2="325" y2="78" stroke="#c9a84c" stroke-width="2.5" marker-end="url(#ah2b2)"/>
+  <text x="285" y="100" font-size="13" fill="#c9a84c" font-weight="bold" font-family="serif" font-style="italic">F<tspan font-size="9" dy="3">21</tspan></text>
+</svg>
+</div>
+
+<p><strong>Приведённая масса</strong> (для задачи двух тел):</p>
+<div class="formula-box">
+$$\mu = \dfrac{m_1 m_2}{m_1 + m_2}$$
+</div>
+<p>При $m_1 \gg m_2$: $\mu \to m_2$. При $m_1 = m_2 = m$: $\mu = \dfrac{m}{2}$.</p>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §9</div>
+  <strong>Задача двух тел</strong> сводится к двум независимым задачам, если ввести $\vec{R}$ (ц.м.) и $\vec{r} = \vec{r}_1 - \vec{r}_2$ (относительное расстояние):
+  $$\ddot{\vec{R}} = 0, \qquad \mu \ddot{\vec{r}} = \vec{F}(\vec{r})$$
+  Центр масс движется равномерно и прямолинейно, а относительное движение эквивалентно движению одной частицы с приведённой массой $\mu$ в поле $\vec{F}(\vec{r})$.
+</div>
+
+
+<!-- работа и энергия -->
+<h2 id="energy">5. Работа и энергия</h2>
+
+<h3 id="work">Работа</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Работа</strong> — скалярное произведение силы и перемещения, Дж:
+  $$A = F S \cos\alpha$$
+  Перемещение — вектор от начального к конечному положению.
+</div>
+
+<div class="diagram">
+<svg width="280" height="130" viewBox="0 0 280 130">
+  <defs>
+    <marker id="ahw" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#2c5f8a"/></marker>
+    <marker id="ahw2" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0,0 7,2.5 0,5" fill="#e55"/></marker>
+  </defs>
+  <!-- вектор перемещения dl -->
+  <line x1="40" y1="95" x2="220" y2="95" stroke="#2c5f8a" stroke-width="2" marker-end="url(#ahw)"/>
+  <text x="225" y="93" font-size="14" fill="#2c5f8a" font-family="serif">d&#x2113;</text>
+  <!-- вектор силы f -->
+  <line x1="40" y1="95" x2="195" y2="30" stroke="#e55" stroke-width="2" marker-end="url(#ahw2)"/>
+  <text x="200" y="28" font-size="14" fill="#e55" font-family="serif">F</text>
+  <!-- угол α -->
+  <path d="M 100 95 A 60 60 0 0 0 94 72" stroke="#555" stroke-width="1.5" fill="none"/>
+  <text x="100" y="85" font-size="14" fill="#555" font-style="italic" font-family="serif">&#x03B1;</text>
+  <!-- начальная точка -->
+  <circle cx="40" cy="95" r="3.5" fill="#1a3d5c"/>
+</svg>
+</div>
+
+<p>В дифференциальной форме:</p>
+<div class="formula-box">
+$$dA = (\vec{F}, d\vec{l}\,) = |\vec{F}| \cdot |d\vec{l}\,| \cos\alpha$$
+$$A_{12} = \int_1^2 (\vec{F}, d\vec{l}\,)$$
+</div>
+
+<h3 id="kinetic">Кинетическая энергия</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Кинетическая энергия</strong> — энергия движения тела, Дж:
+  $$K = \dfrac{mv^2}{2} = \dfrac{(mv)^2}{2m} = \dfrac{P^2}{2m} = \dfrac{Pv}{2}$$
+</div>
+
+<p>Связь работы и кинетической энергии:</p>
+<div class="formula-box">
+$$dA = (m\vec{a}, \vec{v} \, dt) = m \, dv \cdot v = d\!\left(\dfrac{mv^2}{2}\right) = dK$$
+$$\boxed{A_{12} = K_2 - K_1}$$
+</div>
+<p><strong>Изменение кинетической энергии равно работе действующей силы.</strong></p>
+
+<h3 id="power">Мощность</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Мощность</strong> — работа за единицу времени:
+  $$N = \dfrac{dA}{dt} \quad \left[\text{Вт} = \dfrac{\text{Дж}}{\text{с}}\right]$$
+</div>
+
+<div class="example">
+  <div class="box-title">Пример: брусок на доске</div>
+  Брусок массой $m$ толкают со скоростью $v$ по доске массой $M$ с коэффициентом трения $\mu$, длина $L$. Найти $v$, чтобы брусок достиг конца доски.
+  <br><br>
+  По ЗСИ: $mv = (m+M)u$, значит $u = \dfrac{mv}{m+M}$.<br>
+  Сила трения: $F_\text{тр} = \mu N = \mu mg$.<br>
+  Работа трения: $A_\text{тр} = \mu mg L = K_1 - K_2$.
+  $$\mu mgL = \dfrac{mv^2}{2} - \dfrac{m^2 v^2}{2(m+M)} = \dfrac{v^2 M}{2} \cdot \dfrac{m}{m+M}$$
+  $$\boxed{v = \sqrt{2\mu gL\left(1 + \dfrac{m}{M}\right)}}$$
+</div>
+
+<h3 id="conservative">Консервативные силы (потенциальные)</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Консервативные силы</strong> — силы, работа которых по любой замкнутой траектории равна нулю (работа не зависит от траектории):
+  $$\oint (\vec{F}, d\vec{l}\,) = 0$$
+  Траектория — линия, вдоль которой движется тело.
+</div>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §12</div>
+  <strong>Сила трения неконсервативна.</strong> Доказательство: сила трения направлена противоположно скорости, поэтому $\vec{F} \cdot \vec{v} < 0$ всюду, и работа по любому замкнутому контуру отрицательна:
+  $$\oint \vec{F} \cdot d\vec{l} = \oint \vec{F} \cdot \vec{v} \, dt < 0 \neq 0$$
+  <strong>Потенциальная энергия определена с точностью до константы:</strong> $U(\vec{r})$ и $U(\vec{r}) + \text{const}$ соответствуют одному и тому же полю сил, т.е. физически эквивалентны (калибровочная свобода).
+</div>
+
+<div class="example">
+  <div class="box-title">Пример: неконсервативная сила</div>
+  $\vec{F} = (2y, \, 2\lambda x)$. По прямой $(0,0) \to (l,l)$: $A = 2\lambda l^2$. По дуге окружности: $A = 2l^2\!\left(2-\dfrac{\pi}{4}\right)$. При $\lambda \neq 1$: $A_1 \neq A_2$ — сила <strong>неконсервативна</strong>.
+</div>
+
+<h4>Поле одномерной силы</h4>
+<p>Одномерная сила — действует только по одной оси: $\vec{F} = (f(x), 0, 0)$.</p>
+<p>— Сила тяжести: $A = FS\cos\alpha$, работа по замкнутому контуру = 0.</p>
+<p>— Сила упругости: $F_\text{упр} = -k\Delta l$, работа деформации $= \dfrac{k\delta x^2}{2}$.</p>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §12</div>
+  Потенциальная энергия одномерных сил:<br>
+  — Сила тяжести (ось $x$ вверх): $f(x) = -mg$, $U(x) = mgx$ (при $U(0) = 0$).<br>
+  — Линейный осциллятор (пружина): $f(x) = -kx$, $U(x) = \dfrac{kx^2}{2}$.<br>
+  Любое поле одномерной силы вида $\vec{F} = (f(x), 0, 0)$ является <strong>потенциальным</strong> (доказывается разбиением замкнутого контура на пары участков, на которых работа сокращается).
+</div>
+
+<h4>Центральное поле</h4>
+<p>В центральном поле сила направлена по (или против) радиус-вектору:</p>
+<div class="formula-box">
+$$\vec{F} = f(|\vec{r}|) \, \vec{e}_r = f(|\vec{r}|) \dfrac{\vec{r}}{|\vec{r}|}$$
+</div>
+<p>Примеры: сила тяготения $\vec{F} = -G \dfrac{m_1 m_2}{R^2} \dfrac{\vec{R}}{R}$, сила Кулона $\vec{F} = k \dfrac{q_1 q_2}{r^2} \dfrac{\vec{r}}{r}$.</p>
+
+<h3 id="potential">Потенциальная энергия</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Потенциальная энергия</strong> — энергия взаимодействия, $U$, Дж. Изменение потенциальной энергии равно <strong>минус</strong> работе консервативной силы:
+  $$U_2 - U_1 = -\int_1^2 (\vec{F}, d\vec{l}\,) = -A_{12}$$
+</div>
+
+<p>Из определения:</p>
+<div class="formula-box">
+$$dU = -(F_x \, dx + F_y \, dy + F_z \, dz)$$
+</div>
+<div class="formula-box">
+$$F_x = -\dfrac{\partial U}{\partial x}, \quad F_y = -\dfrac{\partial U}{\partial y}, \quad F_z = -\dfrac{\partial U}{\partial z}$$
+</div>
+
+<p><strong>Градиент:</strong></p>
+<div class="formula-box">
+$$\vec{F} = -\nabla U = -\text{grad} \, U$$
+$$-\nabla U = -\left(\dfrac{\partial}{\partial x}, \dfrac{\partial}{\partial y}, \dfrac{\partial}{\partial z}\right) U = (F_x, F_y, F_z)$$
+</div>
+
+<p>Для гравитации ($\alpha = Gm_1 m_2$), калибровка $U(a \to \infty) = 0$:</p>
+<div class="formula-box">
+$$U(r) = -\dfrac{G m_1 m_2}{r}$$
+</div>
+
+<h3 id="conservation">Закон сохранения энергии</h3>
+
+<p>В поле консервативных сил энергия ниоткуда не возникает и никуда не исчезает, а лишь переходит из одного вида в другой.</p>
+
+<p><strong>Полная энергия</strong> (сумма кинетической и потенциальной) в поле консервативных сил <strong>сохраняется</strong>:</p>
+
+<div class="formula-box">
+$$K_2 + U_2 = K_1 + U_1 \quad \Rightarrow \quad \boxed{E = K + U = \text{const}}$$
+$$\dfrac{dE}{dt} = 0$$
+</div>
+
+<p><strong>Доказательство:</strong></p>
+<p>$\dfrac{dK}{dt} = \sum_i m_i v_i \dfrac{dv_i}{dt}$, $\dfrac{dU}{dt} = \sum_i \dfrac{\partial U_i}{\partial r} \dfrac{dr}{dt} = -\sum_i F_i v_i$.</p>
+<p>$\dfrac{dE}{dt} = \sum_i v_i (m_i a_i - F_i) = 0$ по II закону Ньютона.</p>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §13–14</div>
+  <strong>Важно:</strong> ЗСЭ справедлив только если внешние условия <strong>стационарны</strong> ($\dfrac{\partial U}{\partial t} = 0$). Если потенциальная энергия подсистемы явно зависит от времени (через положения внешних тел), то $\dfrac{dE}{dt} = \dfrac{\partial U}{\partial t} \neq 0$ — энергия подсистемы не сохраняется.
+  <br><br>
+  <strong>Внутренняя энергия</strong> тела — его полная энергия в системе центра масс:
+  $$E_\text{вн} = E_\text{ц} = K_\text{ц} + U_\text{ц}$$
+  Полная энергия в ЛСО: $E = E_\text{вн} + \dfrac{MV_\text{цм}^2}{2}$, т.е. сложное тело имеет наименьшую энергию в системе центра масс.
+</div>
+
+<div class="example">
+  <div class="box-title">Пример: нитка через блок</div>
+  Тянем за нитку вниз с силой $F = \text{const}$. Нитка начальной длины $L+h$, конечная $\sqrt{L^2+h^2}$.
+  $$\Delta K = \dfrac{mv^2}{2}, \quad \Delta U = -F \cdot S, \quad S = L + h - \sqrt{L^2 + h^2}$$
+  $$v = \sqrt{\dfrac{2FS}{m}}$$
+</div>
+
+
+<!-- столкновения -->
+<h2 id="collisions">6. Столкновения</h2>
+
+<div class="diagram">
+<svg width="400" height="120" viewBox="0 0 400 120">
+  <defs>
+    <marker id="ahcr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#2c5f8a"/></marker>
+    <marker id="ahcl" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#c9a84c"/></marker>
+  </defs>
+  <!-- лобовой удар -->
+  <text x="30" y="18" font-size="12" fill="#555" font-weight="bold" font-family="sans-serif">Лобовой удар:</text>
+  <!-- шар 1 -->
+  <circle cx="60" cy="55" r="18" fill="#e8f0f7" stroke="#2c5f8a" stroke-width="1.5"/>
+  <!-- стрелка скорости v1 -->
+  <line x1="80" y1="55" x2="115" y2="55" stroke="#2c5f8a" stroke-width="2.5" marker-end="url(#ahcr)"/>
+  <text x="90" y="47" font-size="12" fill="#2c5f8a" font-weight="bold" font-family="serif">v<tspan font-size="8" dy="3">1</tspan></text>
+  <!-- шар 2 -->
+  <circle cx="160" cy="55" r="18" fill="#fff3cd" stroke="#c9a84c" stroke-width="1.5"/>
+  <!-- стрелка скорости v2 -->
+  <line x1="140" y1="55" x2="125" y2="55" stroke="#c9a84c" stroke-width="2.5" marker-end="url(#ahcl)"/>
+  <text x="127" y="47" font-size="12" fill="#c9a84c" font-weight="bold" font-family="serif">v<tspan font-size="8" dy="3">2</tspan></text>
+  <!-- линия удара -->
+  <line x1="40" y1="90" x2="180" y2="90" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="65" y="108" font-size="10" fill="#888" font-family="sans-serif">линия удара</text>
+
+  <!-- касательный удар -->
+  <text x="230" y="18" font-size="12" fill="#555" font-weight="bold" font-family="sans-serif">Касательный:</text>
+  <!-- шар 1 под углом -->
+  <circle cx="260" cy="38" r="18" fill="#e8f0f7" stroke="#2c5f8a" stroke-width="1.5"/>
+  <!-- стрелка скорости под углом -->
+  <line x1="278" y1="44" x2="310" y2="58" stroke="#2c5f8a" stroke-width="2.5" marker-end="url(#ahcr)"/>
+  <text x="298" y="48" font-size="12" fill="#2c5f8a" font-weight="bold" font-family="serif">v</text>
+  <!-- неподвижный шар 2 -->
+  <circle cx="335" cy="70" r="18" fill="#fff3cd" stroke="#c9a84c" stroke-width="1.5"/>
+  <!-- линия удара -->
+  <line x1="240" y1="100" x2="360" y2="100" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="252" y="115" font-size="10" fill="#888" font-family="sans-serif">v &#x2260; линии удара</text>
+</svg>
+</div>
+
+<p>Типы: <strong>лобовой</strong> (скорость вдоль линии удара) и <strong>касательный</strong> (скорость не совпадает с линией удара).</p>
+
+<h3 id="restitution">Коэффициент восстановления</h3>
+
+<p>При ударе мяча: фаза деформации (импульс $\int P \, dt$) и фаза восстановления (импульс $\int R \, dt$):</p>
+
+<div class="formula-box">
+$$e = \dfrac{\int R \, dt}{\int P \, dt} = \dfrac{v - V'}{V - v}, \quad 0 \leq e \leq 1$$
+</div>
+
+<p>$e = 1$ — абсолютно упругий удар, $e = 0$ — абсолютно неупругий.</p>
+
+<h3 id="elastic">Упругое столкновение</h3>
+
+<p>Кинетическая энергия сохраняется. В <strong>системе центра масс (СЦМ)</strong>:</p>
+
+<div class="formula-box">
+$$\vec{P}_1' + \vec{P}_2' = \vec{P}_1'' + \vec{P}_2'' = 0$$
+</div>
+
+<p>В СЦМ: $\vec{P}_1' = -\vec{P}_2'$, $\vec{P}_1'' = -\vec{P}_2''$. Из сохранения кинетической энергии:</p>
+
+<div class="formula-box">
+$$\dfrac{P_1'^2}{2m_1} + \dfrac{P_2'^2}{2m_2} = \dfrac{P_1''^2}{2m_1} + \dfrac{P_2''^2}{2m_2}$$
+</div>
+
+<p>Модули импульсов не меняются, меняются только <strong>направления</strong>.</p>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §14</div>
+  В СЦМ при упругом ударе: $|p_{1\text{ц}}| = |p_{2\text{ц}}| = |p'_{1\text{ц}}| = |p'_{2\text{ц}}|$. Связь импульсов в ЛСО (вторая частица покоится) с импульсами в СЦМ:
+  $$p_1 = p_{1\text{ц}} + m_1 V_\text{ц}, \quad p_2' = p_{2\text{ц}}' + m_2 V_\text{ц}, \quad V_\text{ц} = \dfrac{p_1}{m_1 + m_2}$$
+</div>
+
+<h3 id="inelastic">Абсолютно неупругое столкновение</h3>
+
+<p>Тела слипаются в единое целое ($m_1 + m_2$). Кинетическая энергия <strong>не сохраняется</strong> — часть переходит во внутреннюю энергию $Q$:</p>
+
+<div class="formula-box">
+$$\dfrac{m_1 v_1^2}{2} + \dfrac{m_2 v_2^2}{2} = \dfrac{(m_1+m_2) V^2}{2} + Q$$
+$$m_1 \vec{v}_1 + m_2 \vec{v}_2 = (m_1 + m_2) \vec{V}$$
+</div>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §14</div>
+  Потеря кинетической энергии $K - K'$ при неупругом ударе <strong>максимальна</strong>, когда $K' = 0$, т.е. когда соударение происходит в системе центра инерции. Это нерелятивистский аналог <strong>преимущества встречных пучков</strong> в физике элементарных частиц.
+</div>
+
+<h3 id="com-frame">Система центра масс (инерции)</h3>
+
+<p>Скорость центра масс для 2 тел ($m$ с $v_1$ и $M$ в покое):</p>
+<div class="formula-box">
+$$V_\text{цм} = \dfrac{m v_1}{m + M}$$
+</div>
+
+<p>Для $n$ тел:</p>
+<div class="formula-box">
+$$V_\text{цм} = \dfrac{\sum_{i=1}^n m_i \vec{v}_i}{\sum_{i=1}^n m_i}$$
+</div>
+
+<p>Кинетическая энергия в ЛСО (через ЛСО скорость $\vec{v}_i = \vec{v}_i' + \vec{V}$):</p>
+<div class="formula-box">
+$$K = \sum \dfrac{m_i v_i^2}{2} = \underbrace{\sum \dfrac{m_i v_i'^2}{2}}_{K'_\text{сцм}} + \underbrace{\dfrac{MV^2}{2}}_\text{движ. ц.м.}$$
+</div>
+<p>(Перекрёстный член $\vec{V} \sum \vec{P}_i' = 0$, т.к. в СЦМ суммарный импульс = 0.)</p>
+
+<h3 id="decay">Распад</h3>
+
+<p>Начальный импульс $\vec{P}_\text{н} = 0$, конечный $\vec{P}_\text{к} = \sum m_i \vec{v}_i = 0$ (ЗСИ).</p>
+<p>По ЗСЭ:</p>
+<div class="formula-box">
+$$E_\text{внутр}^\text{до} = E_\text{внутр}^\text{после} + \sum \dfrac{m_i v_i^2}{2}$$
+$$\Rightarrow \quad E_\text{внутр}^\text{до} > E_\text{внутр}^\text{после}$$
+</div>
+<p>Внутренняя энергия уменьшается — часть переходит в кинетическую.</p>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §14</div>
+  <strong>Условие распада:</strong> распад возможен лишь при
+  $$E_\text{вн} > \sum_i E_{\text{вн},i}$$
+  т.е. внутренняя энергия исходного тела должна превышать суммарную внутреннюю энергию продуктов распада.
+</div>
+
+
+<!-- фундаментальные взаимодействия -->
+<h2 id="fundamental">7. Фундаментальные взаимодействия</h2>
+
+<p>В природе существует <strong>4 фундаментальных взаимодействия</strong>:</p>
+
+<div class="two-col">
+<div>
+  <h4>Слабое</h4>
+  <p>Действует на расстояниях в 1000 раз меньше протона. Переносчики — бозоны $W^\pm, Z^0$ (+ бозон Хиггса). Примеры:</p>
+  <p>$\beta^+$: $p \to n + e^+ + \nu_e$</p>
+  <p>$\beta^-$: $n \to p + e^- + \bar\nu_e$</p>
+  <p>Необходимо для ядерных реакций.</p>
+</div>
+<div>
+  <h4>Электромагнитное</h4>
+  <p>Переносчик — фотоны. Проявления: сила упругости, трения, поверхностного натяжения, Лоренца, Ампера, реакции опоры, натяжения нити, Кулона и т.д.</p>
+  <p>Заряженные частицы обмениваются фотонами: притягиваются или отталкиваются.</p>
+</div>
+<div>
+  <h4>Сильное</h4>
+  <p>Связь кварков внутри протонов и нейтронов. Удерживает протоны и нейтроны в ядре (хотя протоны отталкиваются по Кулону).</p>
+  <p>В ~100 раз сильнее электромагнитного, но действует на $\sim 10^{-15}$ м.</p>
+</div>
+<div>
+  <h4>Гравитационное</h4>
+  <p>$F = \dfrac{G m_1 m_2}{r^2}$, $U = -\dfrac{G m_1 m_2}{r}$.</p>
+  <p>Проявляется при больших массах (искажение пространства-времени).</p>
+  <p>1-я космич. скорость: $v = \sqrt{gR} \approx 7{,}9$ км/с</p>
+  <p>2-я космич. скорость: $v = \sqrt{2gR} \approx 11{,}2$ км/с</p>
+</div>
+</div>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §15</div>
+  <strong>Закон Кулона</strong> (1785): для точечных зарядов $q_1, q_2$ при $v \ll c$:
+  $$\vec{F}_{21} = k \dfrac{q_1 q_2}{r^3} \vec{r}, \quad k \approx 9 \cdot 10^9 \dfrac{\text{Н} \cdot \text{м}^2}{\text{Кл}^2}$$
+  Потенциальная энергия: $U_{12} = \dfrac{k \, q_1 q_2}{|\vec{r}_2 - \vec{r}_1|}$. Элементарный заряд: $e \approx 1{,}6 \cdot 10^{-19}$ Кл.
+  <br><br>
+  <strong>Сравнение сил:</strong> в атоме водорода $\dfrac{F_\text{грав}}{F_\text{элект}} \sim 10^{-39}$ — гравитация в атомных масштабах абсолютно ничтожна.
+  <br><br>
+  <strong>«Взвешивание» Земли</strong> (опыт Кавендиша, 1798): из $mg = \dfrac{Gm \cdot m_\text{З}}{R_\text{З}^2}$ находим
+  $$m_\text{З} = \dfrac{g R_\text{З}^2}{G} \approx 6 \cdot 10^{24} \text{ кг}$$
+  <strong>Вывод космических скоростей:</strong><br>
+  1-я: из $\dfrac{m v_1^2}{R_\text{З}} = mg$ $\Rightarrow$ $v_1 = \sqrt{gR_\text{З}}$.<br>
+  2-я: из $\dfrac{1}{2}mv_2^2 - \dfrac{Gmm_\text{З}}{R_\text{З}} = 0$ $\Rightarrow$ $v_2 = \sqrt{2gR_\text{З}} = \sqrt{2} \cdot v_1$.
+</div>
+
+<hr>
+
+<!-- релятивистская динамика -->
+<h2 id="reldyn">8. Релятивистская динамика</h2>
+
+<h3 id="4momentum">4-вектор импульса</h3>
+<p>По аналогии с 4-скоростью вводим <strong>4-импульс</strong> частицы массы $m$:</p>
+<div class="formula">
+$$P_\mu = m \, v_\mu = (m c \gamma, \; m \vec v \, \gamma), \qquad \gamma = \dfrac{1}{\sqrt{1 - \dfrac{v^2}{c^2}}}$$
+</div>
+<p>Его квадрат — <strong>лоренц-инвариант</strong>:</p>
+<div class="formula">
+$$P^2 = P_0^2 - \vec P{}^2 = m^2 c^2 = \text{inv}$$
+</div>
+<p>Проверка: $(mc\gamma)^2 - (mv\gamma)^2 = m^2 c^2 \gamma^2 \left(1 - \dfrac{v^2}{c^2}\right) = m^2 c^2$.</p>
+
+<h3 id="relenergy">Релятивистская энергия</h3>
+<p>Нулевую компоненту 4-импульса, умноженную на $c$, называют <strong>полной энергией</strong> частицы:</p>
+<div class="formula">
+$$E = P_0 \cdot c = m c^2 \gamma = \dfrac{m c^2}{\sqrt{1 - \dfrac{v^2}{c^2}}}$$
+</div>
+<p>Разложим в ряд при $v \ll c$:</p>
+<div class="formula">
+$$E = m c^2 \left(1 - \dfrac{v^2}{c^2}\right)^{-1/2} \approx m c^2 + \dfrac{m v^2}{2} + \dots$$
+</div>
+<p>Первое слагаемое — <strong>энергия покоя</strong> $E_0 = mc^2$, второе — привычная нерелятивистская кинетическая энергия. Таким образом,</p>
+<div class="formula">
+$$E = E_\text{покоя} + E_\text{кин}, \qquad E_\text{кин} = (\gamma - 1) m c^2$$
+</div>
+<p>В компонентной записи 4-импульс удобно представить так:</p>
+<div class="formula">
+$$P_\mu = \left(\dfrac{E}{c}, \; \vec P\right), \qquad |\vec P| = m v \gamma$$
+</div>
+<p>Инвариант принимает вид соотношения <strong>энергия–импульс</strong>:</p>
+<div class="formula">
+$$\left(\dfrac{E}{c}\right)^2 - \vec P{}^2 = m^2 c^2 \quad\Longleftrightarrow\quad E = \sqrt{m^2 c^4 + \vec P{}^2 c^2}$$
+</div>
+
+<h3 id="massdefect">Закон сохранения 4-импульса и дефект массы</h3>
+<p>В изолированной системе <strong>сохраняется 4-импульс</strong>: $\sum P_\mu^\text{до} = \sum P_\mu^\text{после}$. Это одновременно и закон сохранения импульса, и закон сохранения энергии.</p>
+
+<div class="two-col">
+<div>
+  <h4>Нерелятивистский случай</h4>
+  <p>Абсолютно неупругое столкновение: $m$ со скоростью $\vec v$ сливается с покоящимся $M$.</p>
+  <p>Импульс: $m \vec v = (m + M) \vec u$</p>
+  <p>Масса: $M_f = m + M$ (сохраняется отдельно)</p>
+</div>
+<div>
+  <h4>Релятивистский случай</h4>
+  <p>Сохраняется 4-импульс целиком:</p>
+  <p>$\gamma_1 m c^2 + \gamma_2 M c^2 = \gamma_3 M_f c^2$</p>
+  <p>$\gamma_1 m \vec v + \gamma_2 M \vec V = \gamma_3 M_f \vec u$</p>
+  <p>В общем случае $M_f \ne m + M$ — масса <em>не</em> аддитивна!</p>
+</div>
+</div>
+
+<div class="formula">
+$$\boxed{\;M_f \ne m + M\; и\ зависит\ от\ частиц\ и\ характера\ их\ взаимодействия} $$
+</div>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §19</div>
+  Пусть составное тело массы $m$ распадается из состояния покоя на $N$ тел. Закон сохранения релятивистской энергии:
+  $$mc^2 = \sum_{j=1}^{N} \left(m_j c^2 + K_j\right)$$
+  где $m_j$ и $K_j$ — масса и кинетическая энергия $j$-го продукта распада. Так как $K_j \geqslant 0$, распад возможен, только если $m > \sum_j m_j$.
+  <br><br>
+  Величина $\Delta m = \sum_{j=1}^{N} m_j - m$ называется <strong>дефектом масс</strong>. Распад возможен только при $\Delta m < 0$ <strong>Энерговыделение реакции</strong> прямо связано с дефектом масс:
+  $$Q = \sum_{j=1}^{N} K_j = -\Delta m \cdot c^2$$
+  При $\Delta m > 0$ распад невозможен, а величина $\varepsilon_{\text{св}} = \Delta m \cdot c^2$ есть <strong>энергия связи</strong> — минимальная работа, которую надо затратить, чтобы «растащить» тело на $N$ составных частей.
+</div>
+
+<h3 id="relforce">Релятивистская сила</h3>
+<p>Сила по определению есть скорость изменения импульса:</p>
+<div class="formula">
+$$\vec F = \dfrac{d \vec P}{d t} = \dfrac{d}{dt}\!\left(m \gamma \vec v\right) = m \gamma \dfrac{d \vec v}{d t} + m \vec v \, \dfrac{(\vec a \cdot \vec v)}{c^2} \gamma^3$$
+</div>
+<p>Рассмотрим два предельных случая:</p>
+<div class="two-col">
+<div>
+  <h4>$\vec a \perp \vec v$</h4>
+  <p>Тогда $\vec a \cdot \vec v = 0$ и второе слагаемое обращается в нуль:</p>
+  <p>$\vec F = m \gamma \, \vec a$</p>
+  <p>(криволинейное движение, например по окружности).</p>
+</div>
+<div>
+  <h4>$\vec a \parallel \vec v$</h4>
+  <p>Вклады складываются:</p>
+  <p>$\vec F = m \gamma^3 \, \vec a$</p>
+  <p>Видно, что «эффективная масса» вдоль направления движения больше, чем поперёк — разогнать частицу вдоль её скорости сложнее.</p>
+</div>
+</div>
+
+<p><strong>Элементарная работа:</strong> $dA = \vec F \cdot d\vec l$. Можно показать, что $dA = dE$, т.е. работа силы равна приращению полной релятивистской энергии.</p>
+
+<h3 id="photon">Фотон и релятивистский эффект Доплера</h3>
+<p>Фотон — частица с нулевой массой $m = 0$. Тогда из соотношения $E^2 = m^2 c^4 + \vec P{}^2 c^2$ следует</p>
+<div class="formula">
+$$E = |\vec P| \, c, \qquad P_\mu = \left(\dfrac{E}{c}, \; \dfrac{E}{c} \, \vec n\right)$$
+</div>
+<p>где $\vec n$ — единичный вектор направления распространения. Энергия и частота кванта связаны формулой Планка:</p>
+<div class="formula">
+$$E = \hbar \omega, \qquad \hbar \approx 1{,}05 \cdot 10^{-34} \text{ Дж}\cdot\text{с}$$
+</div>
+
+<p>Пусть в системе $S'$ источник покоится и излучает фотон частоты $\omega'$ под углом $\theta$ к оси $x'$. Система $S$ движется относительно $S'$ со скоростью $V$ вдоль оси $x$. Применяя преобразования Лоренца к 4-импульсу фотона, получаем <strong>релятивистский эффект Доплера</strong>:</p>
+<div class="formula">
+$$\omega = \dfrac{\omega'\!\left(1 + \dfrac{V}{c}\cos\theta\right)}{\sqrt{1 - \dfrac{V^2}{c^2}}}$$
+</div>
+
+<div class="two-col">
+<div>
+  <h4>$\theta = 0$ — сближение</h4>
+  <p>$\omega = \dfrac{\omega'\!\left(1 + \dfrac{V}{c}\right)}{\sqrt{1 - \dfrac{V^2}{c^2}}} = \omega' \sqrt{\dfrac{1 + \dfrac{V}{c}}{1 - \dfrac{V}{c}}}$</p>
+  <p>$\omega > \omega'$ — <strong>синее смещение</strong> (приближение источника).</p>
+</div>
+<div>
+  <h4>$\theta = \pi$ — удаление</h4>
+  <p>$\omega = \dfrac{\omega'\!\left(1 - \dfrac{V}{c}\right)}{\sqrt{1 - \dfrac{V^2}{c^2}}} = \omega' \sqrt{\dfrac{1 - \dfrac{V}{c}}{1 + \dfrac{V}{c}}}$</p>
+  <p>$\omega < \omega'$ — <strong>красное смещение</strong> (удаление источника).</p>
+</div>
+</div>
+
+<h3 id="ev-units">Электронвольт и массы частиц</h3>
+<p>Массу малых частиц измеряют в <strong>электронвольтах</strong> (эВ), т.к. она сильно связана с энергией ($E = mc^2$): частицы буквально появляются из высокой энергии (например, из высокоэнергетических фотонов или при столкновениях).</p>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>1 эВ</strong> — прирост кинетической энергии частицы с зарядом электрона при прохождении разности потенциалов 1 В:
+  $$1 \text{ эВ} = q_e \cdot U = 1{,}6 \cdot 10^{-19} \text{ Кл} \cdot 1 \text{ В} = 1{,}6 \cdot 10^{-19} \text{ Дж}$$
+</div>
+
+<p>Масса частицы, точнее $mc^2$, также измеряется в электронвольтах.</p>
+
+<div class="example">
+  <div class="box-title">Пример</div>
+  <p>Масса электрона: $m_e c^2 = 0{,}511$ МэВ. Проверка:</p>
+  $$m_e = \dfrac{0{,}511 \cdot 1{,}6 \cdot 10^{-13}}{(3 \cdot 10^{8})^2} = 9{,}1 \cdot 10^{-31} \text{ кг}$$
+</div>
+
+<hr>
+
+<h2 id="oscillations">9. Гармонические колебания</h2>
+
+<h3 id="periodic">Периодические процессы и колебания</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <p><strong>Периодический процесс</strong> — любое повторяющееся действие.</p>
+  <p><strong>Колебание</strong> — движение, которое повторяется относительно положения равновесия.</p>
+  <p><strong>Гармоническое колебание</strong> — колебание по закону $\sin$ или $\cos$.</p>
+</div>
+
+<h3 id="integral-motion">Интеграл движения</h3>
+
+<div class="def">
+  <div class="box-title">Определение</div>
+  <strong>Интеграл движения</strong> — функция координат и скоростей, которая остаётся постоянной при движении механической системы.
+</div>
+
+<p>Полная механическая энергия — интеграл движения для консервативных систем:</p>
+<div class="formula">
+$$E = K + U = \dfrac{m \dot x^2}{2} + U(x) = \text{const}$$
+</div>
+
+<p>Отсюда:</p>
+<div class="formula">
+$$\dot x^2 = \dfrac{2}{m}\bigl(E - U(x)\bigr)$$
+</div>
+
+<p>Разделяя переменные:</p>
+<div class="formula">
+$$\dfrac{dx}{dt} = \pm\sqrt{\dfrac{2}{m}\bigl(E - U(x)\bigr)} \quad\Longrightarrow\quad t = \pm\sqrt{\dfrac{m}{2}} \int \dfrac{dx}{\sqrt{E - U(x)}}$$
+</div>
+
+<h3 id="finite-motion">Финитное и инфинитное движение</h3>
+
+<p><strong>Финитное движение</strong> — движение в ограниченной области $x_a \le x \le x_b$ (частица заключена в потенциальной яме).</p>
+<p><strong>Инфинитное движение</strong> — движение в неограниченной области (частица уходит на бесконечность).</p>
+
+<div class="diagram">
+<svg viewBox="0 0 480 340" width="480" height="340" xmlns="http://www.w3.org/2000/svg" font-family="'Source Sans 3',sans-serif" font-size="13">
+  <defs><marker id="arr-ux" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#1a1a1a"/></marker></defs>
+  <!-- axes -->
+  <line x1="50" y1="250" x2="440" y2="250" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arr-ux)"/>
+  <line x1="50" y1="260" x2="50" y2="15" stroke="#1a1a1a" stroke-width="1.5" marker-end="url(#arr-ux)"/>
+  <text x="435" y="268" fill="#1a1a1a" font-style="italic" font-weight="600">x</text>
+  <text x="20" y="25" fill="#1a1a1a" font-style="italic" font-weight="600">U(x)</text>
+  <!-- U(x) curve: high left wall, dip to first min, rise to local max, dip to second min, then flatten near zero -->
+  <path d="M55,10 C60,12 70,180 100,210 C115,225 130,228 140,220 C160,195 175,145 195,105 C210,75 230,70 250,90 C270,110 285,150 310,180 C330,200 360,220 390,230 C410,235 430,238 445,240" fill="none" stroke="#2c5f8a" stroke-width="2.8"/>
+  <!-- E₀ energy level -->
+  <line x1="50" y1="160" x2="430" y2="160" stroke="#8a6d00" stroke-width="2.5" stroke-dasharray="8,4"/>
+  <text x="22" y="155" fill="#8a6d00" font-weight="700" font-size="14">E₀</text>
+  <!-- intersection points: x₁ (~82), x₂ (~172), x₃ (~295) -->
+  <!-- x₁ dashed down -->
+  <line x1="82" y1="160" x2="82" y2="250" stroke="#555" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="68" y="270" fill="#1a1a1a" font-weight="700" font-size="14" font-style="italic">x₁</text>
+  <!-- x₂ dashed down -->
+  <line x1="172" y1="160" x2="172" y2="250" stroke="#555" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="158" y="270" fill="#1a1a1a" font-weight="700" font-size="14" font-style="italic">x₂</text>
+  <!-- x₃ dashed down -->
+  <line x1="295" y1="160" x2="295" y2="250" stroke="#555" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="281" y="270" fill="#1a1a1a" font-weight="700" font-size="14" font-style="italic">x₃</text>
+  <!-- finite region bar (x₁ to x₂) -->
+  <rect x="82" y="244" width="90" height="8" rx="2" fill="#e8a820"/>
+  <!-- infinite region bar (x₃ to right) -->
+  <rect x="295" y="244" width="130" height="8" rx="2" fill="#7b45b0"/>
+  <!-- legend -->
+  <text x="60" y="310" fill="#1a1a1a" font-weight="700" font-size="13">Финитное</text>
+  <rect x="155" y="300" width="30" height="10" rx="2" fill="#e8a820"/>
+  <text x="195" y="310" fill="#1a1a1a" font-size="13">x₁ ≤ x ≤ x₂</text>
+  <text x="60" y="332" fill="#1a1a1a" font-weight="700" font-size="13">Инфинитное</text>
+  <rect x="155" y="322" width="30" height="10" rx="2" fill="#7b45b0"/>
+  <text x="195" y="332" fill="#1a1a1a" font-size="13">x₃ ≤ x ≤ ∞</text>
+</svg>
+</div>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §20</div>
+  В области $x_1 \leqslant x \leqslant x_2$ частица совершает колебания (движение <em>финитное</em>) с <strong>периодом</strong>:
+  $$T(E) = \sqrt{2m} \int_{x_1}^{x_2} \dfrac{dx}{\sqrt{E - U(x)}}$$
+  где $x_1$ и $x_2$ — точки поворота, определяемые из условия $U(x_i) = E$. В этих точках кинетическая энергия обращается в нуль ($v = 0$), но ускорение $a_i = \dfrac{-U'(x_i)}{m}$ может быть отлично от нуля.
+</div>
+
+<p>Характеристики периодического движения:</p>
+<ul>
+  <li><strong>Период</strong> $T_0$ — время одного полного колебания.</li>
+  <li><strong>Циклическая частота</strong> $\nu = \dfrac{1}{T_0}$ — число периодов за единицу времени (Герц).</li>
+  <li><strong>Круговая частота</strong> $\omega = \dfrac{2\pi}{T_0} = 2\pi\nu$ — число колебаний за $2\pi$ секунд.</li>
+</ul>
+
+<h3 id="harmonic-eq">Уравнение гармонических колебаний</h3>
+
+<p>Разложим потенциальную энергию в ряд Тейлора вблизи положения равновесия $x_0$:</p>
+<div class="formula">
+$$U(x) = U(x_0) + U'(x_0)(x - x_0) + \dfrac{U''(x_0)}{2}(x - x_0)^2 + \dots$$
+</div>
+<p>В точке равновесия $U'(x_0) = 0$. Выбирая $U(x_0) = 0$ и $x_0 = 0$, получаем:</p>
+<div class="formula">
+$$U(x) \approx \dfrac{U''(0)}{2}\,x^2$$
+</div>
+
+<p>Подставляя в выражение для полной энергии:</p>
+<div class="formula">
+$$E = \dfrac{m \dot x^2}{2} + \dfrac{U''(0)}{2}\,x^2 = \text{const}$$
+</div>
+
+<p>Дифференцируя по времени:</p>
+<div class="formula">
+$$\dfrac{dE}{dt} = m \dot x \ddot x + U''(0)\,x\,\dot x = \dot x \bigl(m \ddot x + U''(0)\,x\bigr) = 0$$
+</div>
+<p>При $\dot x \ne 0$ получаем <strong>уравнение гармонических колебаний</strong> (справедливо для малых отклонений!):</p>
+<div class="formula-box">
+$$\ddot x + \omega^2 x = 0, \qquad \omega^2 = \dfrac{U''(0)}{m}$$
+</div>
+
+<p>Общее решение:</p>
+<div class="formula">
+$$x(t) = A\sin(\omega t + \varphi) \quad\text{или}\quad x(t) = A\cos(\omega t + \varphi)$$
+</div>
+<p>где $A$ — амплитуда, $\varphi$ — начальная фаза.</p>
+
+<div class="textbook">
+  <div class="box-title">Из учебника Кочеев-Сербо, §21</div>
+  <strong>Амплитуда</strong> определяется начальными условиями $x(0) = x_0$, $\dot x(0) = v_0$:
+  $$a = \sqrt{x_0^2 + \left(\dfrac{v_0}{\omega}\right)^2}$$
+  <strong>Начальная фаза:</strong>
+  $$\mathrm{tg}\,\varphi = -\dfrac{v_0}{\omega \, x_0}$$
+  Замечательной особенностью линейного осциллятора является тот факт, что его <em>период колебаний не зависит от амплитуды</em> (или от энергии) колебаний и определяется только жёсткостью $k$ и массой $m$:
+  $$T = \dfrac{2\pi}{\omega} = 2\pi \sqrt{\dfrac{m}{k}}$$
+  <br>
+  <strong>Обобщение.</strong> Если потенциальная энергия зависит от обобщённой координаты $q$ (не обязательно длины), а кинетическая энергия имеет вид $K = \dfrac{1}{2} f(q)\,\dot q^2$, то вблизи минимума $q_0$ вводят <strong>эффективную жёсткость</strong> и <strong>эффективную массу</strong>:
+  $$k_{\text{эф}} = \dfrac{d^2 U(q_0)}{dq^2}, \qquad m_{\text{эф}} = f(q_0)$$
+  и уравнение малых колебаний принимает стандартный вид $\ddot x + \omega^2 x = 0$ с $\omega = \sqrt{\dfrac{k_{\text{эф}}}{m_{\text{эф}}}}$.
+  <br><br>
+  <em>Пример:</em> для математического маятника $K = \dfrac{1}{2} m l^2 \dot\varphi^2$, $U = mgl(1 - \cos\varphi) \approx \dfrac{1}{2} mgl\,\varphi^2$, откуда $m_{\text{эф}} = ml^2$, $k_{\text{эф}} = mgl$ и $T = 2\pi\sqrt{\dfrac{l}{g}}$.
+</div>
+
+<h3 id="oscillator-models">Модели линейного осциллятора</h3>
+<p>Примеры систем, совершающих гармонические колебания:</p>
+
+<div class="two-col">
+<div>
+  <h4>Пружинный маятник</h4>
+  <div class="diagram">
+  <svg viewBox="0 0 260 120" width="260" height="120" xmlns="http://www.w3.org/2000/svg" font-family="'Source Sans 3',sans-serif" font-size="13">
+    <!-- wall -->
+    <line x1="20" y1="30" x2="20" y2="90" stroke="#1a1a1a" stroke-width="2"/>
+    <line x1="10" y1="30" x2="20" y2="40" stroke="#888" stroke-width="1"/>
+    <line x1="10" y1="42" x2="20" y2="52" stroke="#888" stroke-width="1"/>
+    <line x1="10" y1="54" x2="20" y2="64" stroke="#888" stroke-width="1"/>
+    <line x1="10" y1="66" x2="20" y2="76" stroke="#888" stroke-width="1"/>
+    <line x1="10" y1="78" x2="20" y2="88" stroke="#888" stroke-width="1"/>
+    <!-- spring zigzag -->
+    <polyline points="20,60 35,60 42,45 56,75 70,45 84,75 98,45 112,75 126,45 133,60 148,60" fill="none" stroke="#2c5f8a" stroke-width="2" stroke-linejoin="round"/>
+    <!-- mass -->
+    <rect x="148" y="42" width="36" height="36" rx="4" fill="#e8f0f7" stroke="#2c5f8a" stroke-width="2"/>
+    <text x="160" y="65" fill="#2c5f8a" font-weight="700">m</text>
+    <!-- arrow -->
+    <line x1="184" y1="60" x2="230" y2="60" stroke="#c9a84c" stroke-width="2" marker-end="url(#arr2)"/>
+    <defs><marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#c9a84c"/></marker></defs>
+    <text x="200" y="52" fill="#c9a84c" font-weight="600">x</text>
+    <!-- label -->
+    <text x="60" y="105" fill="#555" font-size="12">k</text>
+  </svg>
+  </div>
+  <p>$\omega^2 = \dfrac{k}{m}$</p>
+</div>
+<div>
+  <h4>Математический маятник</h4>
+  <div class="diagram">
+  <svg viewBox="0 0 200 160" width="200" height="160" xmlns="http://www.w3.org/2000/svg" font-family="'Source Sans 3',sans-serif" font-size="13">
+    <!-- ceiling -->
+    <line x1="60" y1="10" x2="140" y2="10" stroke="#1a1a1a" stroke-width="2"/>
+    <line x1="65" y1="10" x2="60" y2="2" stroke="#888" stroke-width="1"/>
+    <line x1="77" y1="10" x2="72" y2="2" stroke="#888" stroke-width="1"/>
+    <line x1="89" y1="10" x2="84" y2="2" stroke="#888" stroke-width="1"/>
+    <line x1="101" y1="10" x2="96" y2="2" stroke="#888" stroke-width="1"/>
+    <line x1="113" y1="10" x2="108" y2="2" stroke="#888" stroke-width="1"/>
+    <line x1="125" y1="10" x2="120" y2="2" stroke="#888" stroke-width="1"/>
+    <line x1="137" y1="10" x2="132" y2="2" stroke="#888" stroke-width="1"/>
+    <!-- equilibrium dashed -->
+    <line x1="100" y1="10" x2="100" y2="130" stroke="#aaa" stroke-width="1" stroke-dasharray="4,3"/>
+    <!-- string -->
+    <line x1="100" y1="10" x2="130" y2="120" stroke="#1a1a1a" stroke-width="1.5"/>
+    <!-- mass -->
+    <circle cx="130" cy="120" r="10" fill="#e8f0f7" stroke="#2c5f8a" stroke-width="2"/>
+    <text x="126" y="123" fill="#2c5f8a" font-weight="700" font-size="11">m</text>
+    <!-- angle arc -->
+    <path d="M100,45 A35,35 0 0,1 110,44" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+    <text x="100" y="40" fill="#c9a84c" font-size="12">θ</text>
+    <!-- l label -->
+    <text x="105" y="72" fill="#555" font-size="12" transform="rotate(15,110,70)">l</text>
+    <!-- g arrow -->
+    <line x1="170" y1="60" x2="170" y2="100" stroke="#4a8a4a" stroke-width="2" marker-end="url(#arr3)"/>
+    <defs><marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#4a8a4a"/></marker></defs>
+    <text x="176" y="85" fill="#4a8a4a" font-weight="600">g</text>
+  </svg>
+  </div>
+  <p>$\omega^2 = \dfrac{g}{l}$</p>
+</div>
+</div>
+
+<hr>
+
+</main>
+
+<!-- скрипт подсветки активного пункта оглавления -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const sections = document.querySelectorAll('h2[id], h3[id]');
+  const links = document.querySelectorAll('.sidebar a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const id = entry.target.getAttribute('id');
+        const link = document.querySelector('.sidebar a[href="#' + id + '"]');
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  // закрытие боковой панели на мобильных после клика
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) {
+        document.querySelector('.sidebar').classList.remove('open');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
